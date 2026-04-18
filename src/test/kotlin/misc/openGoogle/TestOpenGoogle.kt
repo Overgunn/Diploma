@@ -6,10 +6,11 @@ import en.QAguru.frontend.helpers.misc.GoogleSearchPage
 import frontend.helpers.BasicUiHelper
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
-import java.lang.Thread.sleep
-import kotlin.concurrent.thread
 
+@Tags(Tag("misc"))
 
 class TestOpenGoogle : BasicUiHelper() {
 
@@ -31,6 +32,5 @@ class TestOpenGoogle : BasicUiHelper() {
             .searchResultCheck()
 
         searchResult shouldBe "https://selenide.org/"
-
     }
 }

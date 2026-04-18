@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Tags
 
 @Feature("Array")
 @Story("Basic array checks: array is not empty")
-@Tags(Tag("array"))
-
+@Tags(Tag("misc"))
 
 class ArrayNotEmptyTest {
     @Test

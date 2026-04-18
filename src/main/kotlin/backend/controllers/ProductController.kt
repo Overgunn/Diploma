@@ -3,6 +3,7 @@ package backend.controllers
 import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.api.models.products.CreateProductRequest
 import backend.api.models.products.CreateProductResponse
+import backend.api.models.products.UpdateProductRequest
 import backend.helpers.AuthorizationHelper
 import backend.helpers.GarbageCollector
 import io.qameta.allure.Step
@@ -28,6 +29,11 @@ class ProductController: Endpoints() {
     fun createProduct(token: String = authHelper.getAdminToken(), product: CreateProductRequest): Response<CreateProductResponse> {
         return products.postCreateProduct(token, product).execute()
             .also { if (it.isSuccessful) GarbageCollector.products.add(it.getAsObject().id) }
+    }
+
+    @Step("Update product")
+    fun updateProduct(token: String = authHelper.getAdminToken(), id: Int, body: UpdateProductRequest): Response<CreateProductResponse?>? {
+        return products.updateProductById(token, id, body).execute()
     }
 
     @Step("Delete product by id: {id}")

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 @Feature("Simple calc operations")
 @Story("substraction function")
-@Tags(Tag("calculator"),Tag("subtraction"),Tag("regression"))
+@Tags(Tag("misc"))
 
 class SubtractFunc {
 

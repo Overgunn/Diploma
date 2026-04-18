@@ -3,7 +3,7 @@ plugins {
     id 'io.qameta.allure' version '3.0.0'
 }
 
-group = 'en.QAguru'
+group = 'en.QaGuru'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -23,7 +23,6 @@ test {
             includeTags System.getProperty("TAGS")
         } //gradle clean test -DTAGS=regression (smoke, etc)
     }
-
     dependsOn 'cleanTest'
     testLogging {
         events "passed","skipped","failed"

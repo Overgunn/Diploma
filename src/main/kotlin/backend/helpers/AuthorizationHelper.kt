@@ -5,7 +5,7 @@ import backend.api.extensions.Extensions.Companion.toBearer
 import backend.api.models.users.createUser.defaultUser
 import backend.controllers.Controllers
 import io.qameta.allure.Step
-import org.example.kotlin.backend.api.models.auth.defaultAdmin
+import backend.api.models.auth.defaultAdmin
 
 class AuthorizationHelper: Controllers() {
 

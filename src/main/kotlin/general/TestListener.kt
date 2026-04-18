@@ -9,7 +9,7 @@ import org.junit.platform.launcher.TestExecutionListener
 import org.junit.platform.launcher.TestIdentifier
 import org.junit.platform.launcher.TestPlan
 
-class TestListener : Controllers(), TestExecutionListener {
+class TestListener: Controllers(), TestExecutionListener {
 
     private val authHelper = AuthorizationHelper()
 
@@ -46,10 +46,5 @@ class TestListener : Controllers(), TestExecutionListener {
             products.deleteProductById(token = authHelper.getAdminToken(), id = id)
                 .also { println("Deleted product: $id") }
         }
-
-        /*        users.getAllUsers(token = authHelper.getAdminToken(), offset = 1, limit = 50).getAsObject().forEach { user ->
-                    if (user.email.contains("@autotest.com")) {
-                        users.deleteUserById(token = authHelper.getAdminToken(), id = user.id)
-                            .also {println("Deleted user: ${user.email}")}*/
     }
 }

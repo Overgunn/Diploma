@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Tags
 
 @Feature("Array")
 @Story("Basic array checks: get 1st element from array")
-@Tags(Tag("array"))
+@Tags(Tag("misc"))
 
 class ArrayGetFirstElement {
     @Test

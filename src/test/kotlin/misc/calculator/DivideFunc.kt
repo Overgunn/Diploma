@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 @Feature("Simple calc operations")
 @Story("divide function")
-@Tags(Tag("calculator"),Tag("divide"),Tag("regression"))
+@Tags(Tag("misc"))
 
 class DivideFunc {
 
