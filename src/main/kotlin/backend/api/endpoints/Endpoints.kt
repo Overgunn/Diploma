@@ -1,6 +1,7 @@
 package org.example.kotlin.backend.api.endpoints
 
 import backend.api.RetrofitClient
+import backend.api.endpoints.OrdersEndpoints
 import backend.api.endpoints.ProductsEndpoints
 import backend.api.endpoints.UserEndpoints
 
@@ -10,4 +11,6 @@ open class Endpoints {
     protected val users: UserEndpoints by lazy { RetrofitClient.createService(UserEndpoints::class.java) }
 
     protected val products: ProductsEndpoints by lazy { RetrofitClient.createService(ProductsEndpoints::class.java) }
+
+    protected val orders: OrdersEndpoints by lazy { RetrofitClient.createService(OrdersEndpoints::class.java) }
 }

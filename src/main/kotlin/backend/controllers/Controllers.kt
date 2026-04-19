@@ -6,4 +6,6 @@ open class Controllers {
     val users get() = UsersController()
 
     val products get() = ProductController()
+
+    val orders get() = OrderController()
 }
