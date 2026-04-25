@@ -21,8 +21,15 @@ test {
     useJUnitPlatform {
         if (System.getProperty("TAGS")) {
             includeTags System.getProperty("TAGS")
-        } //gradle clean test -DTAGS=regression (smoke, etc)
+        }
     }
+    useJUnitPlatform {
+        def tags = System.getProperty("groups")
+        if (tags) {
+            includeTags tags
+        }
+    }
+
     dependsOn 'cleanTest'
     testLogging {
         events "passed","skipped","failed"
