@@ -1,5 +1,9 @@
 package frontend.orders
 
+import backend.api.extensions.Extensions.Companion.getAsObject
+import backend.controllers.Controllers
+import backend.helpers.AuthorizationHelper
+import backend.helpers.GarbageCollector
 import frontend.components.popup.CartPopup
 import frontend.components.popup.OrderPopup
 import frontend.helpers.BasicUiHelper
@@ -12,6 +16,9 @@ import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
 class OrdersCreateTest: BasicUiHelper() {
+
+    val controllers = Controllers()
+    val authHelper = AuthorizationHelper()
 
     @Test
     @Tags(Tag("create-order"), Tag("frontend"))
@@ -31,5 +38,12 @@ class OrdersCreateTest: BasicUiHelper() {
         val orderedItems = OrdersPage().getOrderItems()
 
         orderedItems.size.shouldBe(1)
+
+        controllers.orders.getOrders(token = authHelper.getAdminToken())
+            .getAsObject()
+            .firstOrNull { it.id == orderId }
+            ?.let { GarbageCollector.order.add(it.id)
+                println("Added to GC: ${it.id}")
+            }
     }
 }

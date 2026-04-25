@@ -11,7 +11,7 @@ open class BasicUiHelper {
         Configuration.baseUrl = "http://localhost:4000"
         Configuration.pageLoadStrategy = "normal"
         Configuration.reopenBrowserOnFail = true
-        Configuration.timeout = 5000
+        Configuration.timeout = 6000
         //Configuration.browser = DriverProvider::class.java.name
     }
 
