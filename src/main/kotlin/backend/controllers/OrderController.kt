@@ -31,7 +31,7 @@ class OrderController: Endpoints() {
     }
 
     @Step("Create a new order")
-    fun createOrder(order: CreateOrderRequest): Response<CreateOrderResponse> {
+    fun createNewOrder(order: CreateOrderRequest): Response<CreateOrderResponse> {
         return orders.createOrder(order).execute()
             .also { if (it.isSuccessful) GarbageCollector.order.add(it.getAsObject().id) }
     }
@@ -46,7 +46,7 @@ class OrderController: Endpoints() {
     }
 
     @Step("Delete order id: {id}")
-    fun deleteOrderById(token: String = authHelper.getAdminToken(), id: Int): Response<ResponseBody> {
+    fun deleteOrder(token: String = authHelper.getAdminToken(), id: Int): Response<ResponseBody> {
         return orders.deleteOrderById(token, id).execute()
     }
 }

@@ -17,7 +17,7 @@ class OrderHelper: Controllers() {
         }
 
         listOfOrders.forEach {
-            orders.createOrder(order = it)
+            orders.createNewOrder(order = it)
         }
         return listOfOrders.toList()
     }
@@ -27,7 +27,7 @@ class OrderHelper: Controllers() {
     @Step("Create order with random product")
     fun createOrderWithRandomProduct(): CreateOrderResponse {
         val product = productHelper.createRandomProduct()
-        return orders.createOrder(
+        return orders.createNewOrder(
             order = CreateOrderRequest(
                 userId = null,
                 products = listOf(ProductOrderRequest(product.id))

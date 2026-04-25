@@ -24,7 +24,7 @@ class UpdateOrderTest: Controllers() {
     fun updateOrderStatusTest() {
         val userToken = authHelper.getNewToken()
 
-       val order = orders.createOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
+       val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
 
         val updatedOrder = orders.updateOrderById(
             token = userToken,
@@ -43,7 +43,7 @@ class UpdateOrderTest: Controllers() {
     fun updateOrderStatusParametrized(status: String) {
         val userToken = authHelper.getNewToken()
 
-        val order = orders.createOrder(
+        val order = orders.createNewOrder(
             order = CreateOrderRequest(null, listOf(ProductOrderRequest(1)))
         ).getAsObject()
 

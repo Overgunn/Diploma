@@ -17,7 +17,7 @@ class CreateOrderTest: Controllers() {
     @DisplayName("Create and get order")
     fun createOrder() {
 
-        val order = orders.createOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
+        val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
         val allOrders = orders.getOrders().getAsObject()
 
         order shouldBeIn allOrders

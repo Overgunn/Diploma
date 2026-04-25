@@ -48,7 +48,7 @@ class TestListener: Controllers(), TestExecutionListener {
         }
 
         GarbageCollector.order.forEach { id ->
-            orders.deleteOrderById(token = authHelper.getAdminToken(), id = id)
+            orders.deleteOrder(token = authHelper.getAdminToken(), id = id)
                 .also { println("Deleted order: $id") }
         }
     }
