@@ -2,6 +2,7 @@ package frontend.components
 
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
+import com.codeborne.selenide.SelenideElement
 import frontend.components.popup.CartPopup
 import frontend.helpers.Extensions.Companion.shouldBeVisible
 import frontend.helpers.Wrappers.Companion.byDataTestGroup
@@ -9,7 +10,7 @@ import io.qameta.allure.Step
 
 class HeaderComponent {
     private val linksHeader get() = elements(byDataTestGroup("nav-link"))
-    private val headerUserPic get() = element((".avatar"))
+    private val headerUserPic: SelenideElement get() = element(".avatar")
 
     @Step("Clicks header {name} link")
     fun clickLink(name: String): HeaderComponent {
