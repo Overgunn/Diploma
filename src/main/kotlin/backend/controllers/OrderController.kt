@@ -1,10 +1,13 @@
 package backend.controllers
 
+import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.CreateOrderResponse
-import backend.api.models.products.UpdateProductRequest
+import backend.api.models.orders.UpdateOrderRequest
 import backend.helpers.AuthorizationHelper
+import backend.helpers.GarbageCollector
 import io.qameta.allure.Step
+import okhttp3.ResponseBody
 import org.example.kotlin.backend.api.endpoints.Endpoints
 import retrofit2.Response
 
@@ -28,19 +31,22 @@ class OrderController: Endpoints() {
     }
 
     @Step("Create a new order")
-    fun createOrder(
-        token: String = authHelper.getAdminToken(),
-        order: CreateOrderRequest
-    ): Response<CreateOrderResponse?>? {
-        return orders.createOrder(token, order).execute()
+    fun createOrder(order: CreateOrderRequest): Response<CreateOrderResponse> {
+        return orders.createOrder(order).execute()
+            .also { if (it.isSuccessful) GarbageCollector.order.add(it.getAsObject().id) }
     }
 
     @Step("Update order status")
-    fun updateOrder(
+    fun updateOrderById(
         token: String = authHelper.getAdminToken(),
         id: Int,
-        body: UpdateProductRequest
-    ): Response<CreateOrderResponse?>? {
+        body: UpdateOrderRequest
+    ): Response<CreateOrderResponse> {
         return orders.updateOrderStatus(token, id, body).execute()
+    }
+
+    @Step("Delete order id: {id}")
+    fun deleteOrderById(token: String = authHelper.getAdminToken(), id: Int): Response<ResponseBody> {
+        return orders.deleteOrderById(token, id).execute()
     }
 }

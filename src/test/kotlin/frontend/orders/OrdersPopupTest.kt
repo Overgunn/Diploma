@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 class OrdersPopupTest: BasicUiHelper() {
 
     @Test
-    @Tags(Tag("create-order"), Tag("frontend"))
+    @Tags(Tag("create-order"),Tag("orders-page"),Tag("frontend"))
     @DisplayName("Create an order from main page and check order popup window")
     fun ordersCheckPopupWindow() {
         val firstPopularItem = MainPage().open().getPopularProducts().first()

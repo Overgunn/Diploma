@@ -7,6 +7,8 @@ import backend.controllers.Controllers
 import backend.helpers.AuthorizationHelper
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
 class UpdateProductTest: Controllers() {
@@ -14,6 +16,7 @@ class UpdateProductTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
+    @Tags(Tag("update-product"),Tag("backend"))
     @DisplayName("Create and update product")
     fun updateProduct() {
         val userToken = authHelper.getNewToken()

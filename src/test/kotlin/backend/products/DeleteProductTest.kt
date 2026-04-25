@@ -7,6 +7,8 @@ import backend.helpers.AuthorizationHelper
 import backend.helpers.GarbageCollector
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
 class DeleteProductTest: Controllers() {
@@ -14,6 +16,7 @@ class DeleteProductTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
+    @Tags(Tag("delete-product"),Tag("backend"))
     @DisplayName("Create and delete product")
     fun deleteProduct() {
         val userToken = authHelper.getNewToken()

@@ -1,20 +1,15 @@
 package misc.calculator
 
 import io.kotest.matchers.shouldBe
-import io.qameta.allure.Feature
-import io.qameta.allure.Story
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-@Feature("Simple calc operations")
-@Story("multiply function")
-@Tags(Tag("misc"))
-
 class MultiplyFunc {
 
     @Test
+    @Tags(Tag("misc"),Tag("calculator"))
     @DisplayName("Multiply function")
     fun multiplicationOfTwoNumbers() {
         val a = 2

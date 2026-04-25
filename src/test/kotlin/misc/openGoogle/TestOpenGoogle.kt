@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-@Tags(Tag("misc"))
-
 class TestOpenGoogle : BasicUiHelper() {
 
     init {
@@ -22,6 +20,7 @@ class TestOpenGoogle : BasicUiHelper() {
     }
 
     @Test
+    @Tags(Tag("misc"))
     @DisplayName("Open google main page")
     fun openGoogleMainPage() {
         Selenide.open("/")

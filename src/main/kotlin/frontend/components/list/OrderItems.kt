@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection
 import com.codeborne.selenide.Selenide.elements
 import frontend.helpers.Extensions.Companion.toMoney
 import frontend.helpers.Wrappers.Companion.byDataTestGroup
+import kotlin.text.trim
 
 class OrderItems(val items: ElementsCollection) {
 
@@ -13,17 +14,31 @@ class OrderItems(val items: ElementsCollection) {
         return orderItems
             .map {
                 OrderItem(
+                    orderId = it.find(byDataTestGroup("order-id")).text
+                        .replace("Order ID: ", "")
+                        .trim()
+                        .toInt(),
+                    status = it.find(byDataTestGroup("order-status")).text
+                        .replace("Status: ", "")
+                        .trim(),
+                    createdAt = it.find(byDataTestGroup("order-created")).text,
                     name = it.find(byDataTestGroup("order-product-name")).text,
-                    quantity = it.find(byDataTestGroup("order-product-qty")).text.toInt(),
+                    quantity = it.find(byDataTestGroup("order-product-qty")).text
+                        .replace("x", "")
+                        .trim()
+                        .toInt(),
                     unitPrice = it.find(byDataTestGroup("order-product-unit-price")).text.toMoney(),
                     productPrice = it.find(byDataTestGroup("order-product-price")).text.toMoney(),
-                    totalPrice = it.find(byDataTestGroup("order-total")).text.toMoney(),
+                    totalPrice = it.find(byDataTestGroup("order-total")).text.toMoney()
                 )
             }
     }
 }
 
 data class OrderItem(
+    val orderId: Int,
+    val status: String,
+    val createdAt: String,
     val name: String,
     val quantity: Int,
     val unitPrice: Double,

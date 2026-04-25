@@ -3,6 +3,7 @@ package frontend.pages
 import com.codeborne.selenide.Condition.attribute
 import com.codeborne.selenide.ElementsCollection
 import com.codeborne.selenide.Selectors.shadowCss
+import com.codeborne.selenide.Selenide
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
 import frontend.components.list.OrderItem
@@ -17,6 +18,12 @@ class OrdersPage {
 
     private val orderItems: ElementsCollection get() = elements(byDataTestGroup("order-card"))
 
+    @Step("Open orders page")
+    fun open(): OrdersPage {
+        Selenide.open("/orders")
+        return this
+    }
+
     @Step("Check if placeholder 'Order ID'-text is present in input field")
     fun shouldHaveCorrectPlaceholder() {
         inputOrderId.shouldHave(attribute("placeholder", "Order ID"))
@@ -25,6 +32,7 @@ class OrdersPage {
     @Step("Enter order ID: {id}")
     fun enterOrderId(id: Int): OrdersPage {
         orderIdInput.value = id.toString()
+        orderIdInput.pressEnter()
         return this
     }
 

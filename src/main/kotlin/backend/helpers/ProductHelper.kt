@@ -2,6 +2,7 @@ package backend.helpers
 
 import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.api.models.products.CreateProductRequest
+import backend.api.models.products.CreateProductResponse
 import backend.controllers.Controllers
 import io.qameta.allure.Step
 
@@ -55,5 +56,16 @@ class ProductHelper: Controllers() {
         }
 
         return listOfProducts.toList()
+    }
+
+    @Step("Create random product")
+    fun createRandomProduct(): CreateProductResponse {
+        return products.createProduct(
+            product = CreateProductRequest(
+                name = "Test product",
+                price = 3.0,
+                description = "Random test product for orders"
+            )
+        ).getAsObject()
     }
 }
