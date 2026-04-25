@@ -23,12 +23,7 @@ class DeleteOrderTest: Controllers() {
         val userToken = authHelper.getNewToken()
 
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
-
         val delete = orders.deleteOrder(token = userToken, order.id)
-        println("Delete URL: ${delete.raw().request.url}")
-        println("Delete code: ${delete.code()}")
-        println("Delete errorBody: ${delete.errorBody()?.string()}")
-
         delete.code() shouldBe 200
     }
 }
