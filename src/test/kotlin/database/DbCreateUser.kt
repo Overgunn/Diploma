@@ -14,11 +14,13 @@ import org.junit.jupiter.api.Tags
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
+@Tags(Tag("create-user-DB"),Tag("DB"))
+
 class DbCreateUser: BasicUiHelper() {
 
     private val controllers = Controllers()
 
-    @Tags(Tag("create-user"),Tag("DB"))
+
     @DisplayName("Create and check user with basic JDBC kotlin helper")
     @ParameterizedTest(name = "Username: {0}, Email: {1}, Password: {2}")
     @CsvSource("'testBasic','testBasic','testBasic'")
