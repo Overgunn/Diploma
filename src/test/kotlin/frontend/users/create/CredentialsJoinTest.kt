@@ -17,7 +17,7 @@ class CredentialsJoinTest: BasicUiHelper() {
     private val controllers = Controllers()
 
     @DisplayName("Create account test")
-    @Tags(Tag("create-user"),Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @ParameterizedTest(name = "username: {0}, email {1}, password: {2}")
     @CsvSource("'autotest','autotest@autotest.com','autotest'")
     fun createAccountTest(username: String, email: String, password: String) {
@@ -38,7 +38,7 @@ class CredentialsJoinTest: BasicUiHelper() {
     }
 
     @DisplayName("Parametrized create account validation negative test")
-    @Tags(Tag("create-user"),Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @ParameterizedTest(name = "Username: {0}, Email{1}, Password: {2}, Error: {3}")
     @CsvSource(
         "'', '', '', 'Please enter username, email and password'",

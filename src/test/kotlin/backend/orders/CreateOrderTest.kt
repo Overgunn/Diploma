@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 class CreateOrderTest: Controllers() {
 
     @Test
-    @Tags(Tag("create-order"),Tag("backend"))
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Create and get order")
     fun createOrder() {
 

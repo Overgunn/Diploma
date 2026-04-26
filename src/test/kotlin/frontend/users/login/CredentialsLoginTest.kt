@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource
 class CredentialsLoginTest: BasicUiHelper() {
 
     @DisplayName("Parametrized login validation positive test")
-    @Tags(Tag("login-user"),Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @ParameterizedTest(name = "Email {0}, Password: {1}")
     @CsvSource(
         "'positiveLoginTest@positiveLoginTest.com', 'positiveLoginTest'"
@@ -36,7 +36,7 @@ class CredentialsLoginTest: BasicUiHelper() {
     }
 
     @DisplayName("Parametrized login validation negative test")
-    @Tags(Tag("login-user"),Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @ParameterizedTest(name = "Email {0}, Password: {1}, Error: {2}")
     @CsvSource(
         "'', '', 'Please enter email and password'",

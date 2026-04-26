@@ -20,7 +20,7 @@ class DbCreateUser: BasicUiHelper() {
 
 
     @DisplayName("Create and check user with basic JDBC kotlin helper")
-    @Tags(Tag("create-user-DB"),Tag("DB"))
+    @Tags(Tag("DB"),Tag("regress"),Tag("users"))
     @ParameterizedTest(name = "Username: {0}, Email: {1}, Password: {2}")
     @CsvSource("'testBasic','testBasic','testBasic'")
     fun testCreateUserWithJdbcHelper(username: String, email: String, password: String) {

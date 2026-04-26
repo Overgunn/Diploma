@@ -16,7 +16,7 @@ class UpdateProductTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("update-product"),Tag("backend"))
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     @DisplayName("Create and update product")
     fun updateProduct() {
         val userToken = authHelper.getNewToken()

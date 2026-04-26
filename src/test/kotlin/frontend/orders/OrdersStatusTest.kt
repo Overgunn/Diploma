@@ -21,7 +21,7 @@ class OrdersStatusTest: BasicUiHelper() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("create-order"),Tag("orders-page"),Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
     @DisplayName("Create, and check order status via UI")
     fun orderStatusCheck() {
 
@@ -39,7 +39,7 @@ class OrdersStatusTest: BasicUiHelper() {
     }
 
     @Test
-    @Tags(Tag("create-order"),Tag("orders-page"),Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
     @DisplayName("Create, and update order status, and check status via UI")
     fun orderStatusUpdateCheck() {
 

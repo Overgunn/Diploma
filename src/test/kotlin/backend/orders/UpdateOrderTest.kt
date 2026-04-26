@@ -19,7 +19,7 @@ class UpdateOrderTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("update-order-status"),Tag("backend"))
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Update order status test")
     fun updateOrderStatusTest() {
         val userToken = authHelper.getNewToken()
@@ -37,7 +37,7 @@ class UpdateOrderTest: Controllers() {
     }
 
 
-    @Tags(Tag("update-order-status"),Tag("backend"))
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @ParameterizedTest(name = "Update order status to: {0}")
     @ValueSource(strings = ["PENDING", "IN_PROGRESS", "COMPLETED"])
     fun updateOrderStatusParametrized(status: String) {

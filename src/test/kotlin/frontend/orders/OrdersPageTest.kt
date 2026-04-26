@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 class OrdersPageTest: BasicUiHelper() {
 
     @Test
-    @Tags(Tag(""), Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
     @DisplayName("Header navigation check: go to Orders page")
     fun ordersCheck() {
         MainPage().navigateHeader().clickLink("Orders")

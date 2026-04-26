@@ -15,7 +15,7 @@ class CreateProductTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("create-product"),Tag("backend"))
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     @DisplayName("Create and get product")
     fun createProduct() {
         val userToken = authHelper.getNewToken()

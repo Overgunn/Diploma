@@ -16,7 +16,7 @@ class DeleteProductTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("delete-product"),Tag("backend"))
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     @DisplayName("Create and delete product")
     fun deleteProduct() {
         val userToken = authHelper.getNewToken()

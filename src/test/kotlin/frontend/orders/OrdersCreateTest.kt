@@ -21,7 +21,7 @@ class OrdersCreateTest: BasicUiHelper() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("create-order"), Tag("frontend"))
+    @Tags( Tag("frontend"),Tag("regress"),Tag("orders"))
     @DisplayName("Create an order from main page and check order popup window")
     fun createOrder() {
         MainPage().open().getPopularProducts().first().btnIncrement.click()

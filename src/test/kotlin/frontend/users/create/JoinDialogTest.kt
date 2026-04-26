@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 class JoinDialogTest: BasicUiHelper() {
 
     @Test
-    @Tags(Tag("create-user"),Tag("frontend"))
+    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @DisplayName("Check popup window after clicking 'Join' header button")
     fun joinDialogPopup() {
         MainPage()

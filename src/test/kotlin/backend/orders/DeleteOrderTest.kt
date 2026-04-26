@@ -16,7 +16,7 @@ class DeleteOrderTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("delete-order"),Tag("backend"))
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Create and delete order")
     fun createOrder() {
 
