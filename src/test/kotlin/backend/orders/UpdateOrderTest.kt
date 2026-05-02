@@ -1,7 +1,10 @@
 package backend.orders
 
 import backend.api.extensions.Extensions.Companion.getAsObject
+import backend.api.extensions.Extensions.Companion.getErrorAsObject
+import backend.api.models.ErrorResponse
 import backend.api.models.orders.CreateOrderRequest
+import backend.api.models.orders.OrderErrorResponse.wrongOrderStatus
 import backend.api.models.orders.ProductOrderRequest
 import backend.api.models.orders.UpdateOrderRequest
 import backend.controllers.Controllers
@@ -21,7 +24,7 @@ class UpdateOrderTest: Controllers() {
     @Test
     @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Update order status test")
-    fun updateOrderStatusTest() {
+    fun updateOrderStatusCheck() {
         val userToken = authHelper.getNewToken()
 
        val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
@@ -40,7 +43,7 @@ class UpdateOrderTest: Controllers() {
     @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @ParameterizedTest(name = "Update order status to: {0}")
     @ValueSource(strings = ["PENDING", "IN_PROGRESS", "COMPLETED"])
-    fun updateOrderStatusParametrized(status: String) {
+    fun updateOrderStatusParametrizedCheck(status: String) {
         val userToken = authHelper.getNewToken()
 
         val order = orders.createNewOrder(
@@ -56,4 +59,24 @@ class UpdateOrderTest: Controllers() {
         updatedOrder.orderStatus shouldBe status
         updatedOrder.id shouldBe order.id
     }
+
+    @Test
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    @DisplayName("Update order with invalid status")
+    fun updateNonexistentOrderStatusCheck() {
+        val userToken = authHelper.getNewToken()
+
+        val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
+
+        val updatedOrder = orders.updateOrderById(
+            token = userToken,
+            id = order.id,
+            body = UpdateOrderRequest(orderStatus = "RANDOM")
+        )
+
+        val error = updatedOrder.getErrorAsObject<ErrorResponse>()
+
+        error shouldBe wrongOrderStatus
+    }
 }
+//негативные кейсы(невалидный статус)

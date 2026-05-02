@@ -18,12 +18,21 @@ class DeleteOrderTest: Controllers() {
     @Test
     @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Create and delete order")
-    fun createOrder() {
+    fun deleteOrderCheck() {
 
         val userToken = authHelper.getNewToken()
 
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
         val delete = orders.deleteOrder(token = userToken, order.id)
         delete.code() shouldBe 200
+    }
+
+    @Test
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    @DisplayName("Delete non-existent order")
+    fun deleteNonexistentOrder() {
+        val userToken = authHelper.getNewToken()
+        val delete = orders.deleteOrder(token = userToken, 0)
+        delete.code() shouldBe 404
     }
 }

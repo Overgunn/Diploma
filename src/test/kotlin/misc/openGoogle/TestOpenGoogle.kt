@@ -3,14 +3,12 @@ package misc.openGoogle
 import com.codeborne.selenide.Configuration
 import com.codeborne.selenide.Selenide
 import en.QAguru.frontend.helpers.misc.GoogleSearchPage
-import frontend.helpers.BasicUiHelper
+import frontend.helpers.TestBaseUI
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Tag
-import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class TestOpenGoogle : BasicUiHelper() {
+class TestOpenGoogle : TestBaseUI() {
 
     init {
         Configuration.baseUrl = "http://google.com"
@@ -20,7 +18,6 @@ class TestOpenGoogle : BasicUiHelper() {
     }
 
     @Test
-    @Tags(Tag("misc"))
     @DisplayName("Open google main page")
     fun openGoogleMainPage() {
         Selenide.open("/")

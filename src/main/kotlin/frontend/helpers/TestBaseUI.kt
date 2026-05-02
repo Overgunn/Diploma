@@ -5,7 +5,7 @@ import com.codeborne.selenide.Selenide
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 
-open class BasicUiHelper {
+open class TestBaseUI {
 
     init {
         Configuration.baseUrl = "http://localhost:4000"

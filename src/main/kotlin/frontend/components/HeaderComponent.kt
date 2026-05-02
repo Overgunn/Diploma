@@ -4,7 +4,6 @@ import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
 import frontend.components.popup.CartPopup
-import frontend.helpers.Extensions.Companion.shouldBeVisible
 import frontend.helpers.Wrappers.Companion.byDataTestGroup
 import io.qameta.allure.Step
 
@@ -24,8 +23,8 @@ class HeaderComponent {
     }
 
     @Step("Checks if avatar is present on the header after successful logging in")
-    fun checkUserPic(): Boolean {
-        return headerUserPic.shouldBeVisible()
+    fun isAvatarVisible(): Boolean {
+        return headerUserPic.isDisplayed
     }
 
     @Step("Get cart popup")

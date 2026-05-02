@@ -1,57 +1,52 @@
 package frontend.users.create
 
-import backend.api.extensions.Extensions.Companion.getAsObject
-import backend.controllers.Controllers
-import backend.helpers.GarbageCollector
+import frontend.helpers.UserHelper
 import frontend.components.popup.CreateAccountPopup
-import frontend.helpers.BasicUiHelper
+import frontend.helpers.TestBaseUI
 import frontend.pages.MainPage
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class CredentialsJoinTest: BasicUiHelper() {
+class CredentialsJoinTest: TestBaseUI() {
 
-    private val controllers = Controllers()
+    private val userHelper = UserHelper()
 
+    @Test
     @DisplayName("Create account test")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
-    @ParameterizedTest(name = "username: {0}, email {1}, password: {2}")
-    @CsvSource("'autotest','autotest@autotest.com','autotest'")
-    fun createAccountTest(username: String, email: String, password: String) {
+    fun createAccountTest() {
+        val username = "testBasic"
+        val email = "testBasic@testBasic.com"
+        val password = "testBasic"
 
         MainPage().navigateHeader().clickLink("Join")
 
         CreateAccountPopup()
             .joinAs(username, email, password)
 
-        MainPage().navigateHeader().checkUserPic()
-
-        controllers.users.getAllUsers()
-            .getAsObject()
-            .firstOrNull { it.email == email }
-            ?.let { GarbageCollector.user.add(it.id)
-                println("Added to GC: ${it.id}, email: ${it.email}")
-            }
+        MainPage().navigateHeader().isAvatarVisible()
+        userHelper.usersForGC(email)
     }
 
     @DisplayName("Parametrized create account validation negative test")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
-    @ParameterizedTest(name = "Username: {0}, Email{1}, Password: {2}, Error: {3}")
+    @ParameterizedTest(name = "Username: {0}, Email {1}, Password: {2}, Error: {3}")
     @CsvSource(
         "'', '', '', 'Please enter username, email and password'",
         "'user', '', '', 'Please enter username, email and password'",
-        "'user', '1@1.com', '', 'Please enter username, email and password'",
-        "'q','q',q', 'Something went wrong. Please verify request.'"
-    )
+        "'user', 'user@user.com', '', 'Please enter username, email and password'",
+        "'wrongpass','wrongpass@wrongpass.com',wrongpass1', 'Something went wrong. Please verify request.'")
     fun createAccountValidation(username: String, email: String, password: String, expectedError: String) {
 
         MainPage().navigateHeader().clickLink("Join")
 
         CreateAccountPopup()
             .joinAs(username, email, password)
-            .getErrorMessage(expectedError)
+            .getJoinErrorMessage() shouldBe expectedError
     }
 }

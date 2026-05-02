@@ -23,12 +23,6 @@ test {
             includeTags System.getProperty("TAGS")
         }
     }
-    useJUnitPlatform {
-        def tags = System.getProperty("groups")
-        if (tags) {
-            includeTags tags
-        }
-    }
 
     dependsOn 'cleanTest'
     testLogging {
@@ -54,7 +48,7 @@ dependencies {
 
     //Database
     def exposedVersion = "1.1.1"
-    testImplementation group: 'org.postgresql', name: 'postgresql', version: '42.7.10'
+    testImplementation group: 'org.postgresql', name: 'postgresql', version: '42.7.11'
     implementation group: 'org.jetbrains.exposed', name: 'exposed-core', version: exposedVersion
     implementation group: 'org.jetbrains.exposed', name: 'exposed-jdbc', version: exposedVersion
 
@@ -68,11 +62,8 @@ dependencies {
     implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.33.0'
     implementation group: 'io.qameta.allure', name: 'allure-okhttp3', version: '2.33.0'
 
-    // Source: https://mvnrepository.com/artifact/com.typesafe/config
     implementation("com.typesafe:config:1.4.3")
-    // Source: https://mvnrepository.com/artifact/org.spongepowered/configurate-hocon
     testImplementation group: 'org.spongepowered', name: 'configurate-hocon', version: '4.2.0'
-    // Source: https://mvnrepository.com/artifact/com.typesafe/config
     testImplementation group: 'com.typesafe', name: 'config', version: '1.4.3'
 
 }

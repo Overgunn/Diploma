@@ -1,7 +1,10 @@
 package backend.products
 
 import backend.api.extensions.Extensions.Companion.getAsObject
+import backend.api.extensions.Extensions.Companion.getErrorAsObject
+import backend.api.models.ErrorResponse
 import backend.api.models.products.CreateProductRequest
+import backend.api.models.products.ProductErrorResponse.invalidProduct
 import backend.controllers.Controllers
 import backend.helpers.AuthorizationHelper
 import backend.helpers.GarbageCollector
@@ -31,4 +34,17 @@ class DeleteProductTest: Controllers() {
 
         delete.code() shouldBe 200
     }
+
+    @Test
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
+    @DisplayName("Create and delete product")
+    fun deleteNonexistentProduct() {
+        val userToken = authHelper.getNewToken()
+
+        val delete = products.deleteProductById(token = userToken, 0)
+        val error = delete.getErrorAsObject<ErrorResponse>()
+
+        error shouldBe invalidProduct
+    }
 }
+//негативные кейсы

@@ -1,12 +1,9 @@
 package frontend.orders
 
-import backend.api.extensions.Extensions.Companion.getAsObject
-import backend.controllers.Controllers
-import backend.helpers.AuthorizationHelper
-import backend.helpers.GarbageCollector
 import frontend.components.popup.CartPopup
 import frontend.components.popup.OrderPopup
-import frontend.helpers.BasicUiHelper
+import frontend.helpers.OrderHelperFE
+import frontend.helpers.TestBaseUI
 import frontend.pages.MainPage
 import frontend.pages.OrdersPage
 import io.kotest.matchers.shouldBe
@@ -14,36 +11,34 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
+import java.lang.Thread.sleep
 
-class OrdersCreateTest: BasicUiHelper() {
+class OrdersCreateTest: TestBaseUI() {
 
-    val controllers = Controllers()
-    val authHelper = AuthorizationHelper()
+    private val orderHelper = OrderHelperFE()
 
     @Test
     @Tags( Tag("frontend"),Tag("regress"),Tag("orders"))
     @DisplayName("Create an order from main page and check order popup window")
     fun createOrder() {
         MainPage().open().getPopularProducts().first().btnIncrement.click()
+        val mainPageItem = MainPage().getPopularProducts().first()
 
         MainPage().navigateHeader().clickLink("Cart")
         CartPopup().checkoutButtonClick()
 
         val orderId = OrderPopup().getOrderId()
         OrderPopup().orderPopupCloseBtn()
+        orderHelper.ordersForGC(orderId)
 
         MainPage().navigateHeader().clickLink("Order")
         OrdersPage().enterOrderId(orderId)
 
+        sleep(2000)
+
         val orderedItems = OrdersPage().getOrderItems()
 
         orderedItems.size.shouldBe(1)
-
-        controllers.orders.getOrders(token = authHelper.getAdminToken())
-            .getAsObject()
-            .firstOrNull { it.id == orderId }
-            ?.let { GarbageCollector.order.add(it.id)
-                println("Added to GC: ${it.id}")
-            }
+        mainPageItem.name shouldBe orderedItems.first().name
     }
 }

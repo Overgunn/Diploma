@@ -7,7 +7,9 @@ import backend.api.models.orders.ProductOrderRequest
 import backend.controllers.Controllers
 import io.qameta.allure.Step
 
-class OrderHelper: Controllers() {
+class OrderHelperBE: Controllers() {
+
+    private val productHelper = ProductHelper()
 
     @Step
     fun createOrder(count: Int): List<CreateOrderRequest>{
@@ -22,15 +24,13 @@ class OrderHelper: Controllers() {
         return listOfOrders.toList()
     }
 
-    private val productHelper = ProductHelper()
-
     @Step("Create order with random product")
     fun createOrderWithRandomProduct(): CreateOrderResponse {
         val product = productHelper.createRandomProduct()
         return orders.createNewOrder(
             order = CreateOrderRequest(
                 userId = null,
-                products = listOf(ProductOrderRequest(product.id))
+                products = listOf(ProductOrderRequest(product.id)) //попробовать заменить на создание через testListener, с использованием ENUM
             )
         ).getAsObject()
     }

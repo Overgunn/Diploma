@@ -2,7 +2,8 @@ package frontend.orders
 
 import frontend.components.popup.CartPopup
 import frontend.components.popup.OrderPopup
-import frontend.helpers.BasicUiHelper
+import frontend.helpers.OrderHelperFE
+import frontend.helpers.TestBaseUI
 import frontend.pages.MainPage
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
@@ -10,7 +11,9 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class OrdersPopupTest: BasicUiHelper() {
+class OrdersPopupTest: TestBaseUI() {
+
+    private val orderHelper = OrderHelperFE()
 
     @Test
     @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
@@ -22,7 +25,11 @@ class OrdersPopupTest: BasicUiHelper() {
         MainPage().navigateHeader().clickLink("Cart")
         CartPopup().checkoutButtonClick()
 
+        val orderId = OrderPopup().getOrderId()
+        orderHelper.ordersForGC(orderId)
+
         OrderPopup().orderPopupTitle() shouldBe "Order Created!"
+        OrderPopup().orderPopupWindowId() shouldBe "Order ID: ${OrderPopup().getOrderId()}"
         OrderPopup().orderPopupWindowStatus() shouldBe "Status: PENDING"
     }
 }

@@ -1,23 +1,24 @@
 package frontend.pages
 
-import com.codeborne.selenide.CollectionCondition
-import com.codeborne.selenide.Condition.attribute
 import com.codeborne.selenide.ElementsCollection
 import com.codeborne.selenide.Selectors.shadowCss
 import com.codeborne.selenide.Selenide
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
+import com.codeborne.selenide.SelenideElement
 import frontend.components.list.OrderItem
 import frontend.components.list.OrderItems
 import frontend.helpers.Wrappers.Companion.byDataTestGroup
 import io.qameta.allure.Step
 
 class OrdersPage {
-    private val inputOrderId get() = element("[placeholder='Order ID']")
+    private val placeholderText: SelenideElement get() = element("[placeholder='Order ID']")
 
     private val orderIdInput get() = element("[placeholder='Order ID']").find(shadowCss("input"))
 
     private val orderItems: ElementsCollection get() = elements(byDataTestGroup("order-card"))
+
+    private val orderErrorMessage: SelenideElement get() = element(".order-error")
 
     @Step("Open orders page")
     fun open(): OrdersPage {
@@ -26,8 +27,8 @@ class OrdersPage {
     }
 
     @Step("Check if placeholder 'Order ID'-text is present in input field")
-    fun shouldHaveCorrectPlaceholder() {
-        inputOrderId.shouldHave(attribute("placeholder", "Order ID"))
+    fun placeHolderName(string: String): String {
+        return placeholderText.text
     }
 
     @Step("Enter order ID: {id}")
@@ -39,7 +40,11 @@ class OrdersPage {
 
     @Step("Get products object list")
     fun getOrderItems(): List<OrderItem> {
-        orderItems.shouldHave(CollectionCondition.sizeGreaterThan(0))
         return OrderItems(orderItems).getItems()
+    }
+
+    @Step("Get error message")
+    fun getOrderErrorMessage(expectedMessage: String): String {
+        return orderErrorMessage.text
     }
 }

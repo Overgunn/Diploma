@@ -2,28 +2,32 @@ package database
 
 import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.controllers.Controllers
-import backend.helpers.GarbageCollector
+import frontend.helpers.UserHelper
 import frontend.components.popup.CreateAccountPopup
-import frontend.helpers.BasicUiHelper
+import frontend.helpers.TestBaseUI
 import frontend.pages.MainPage
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.api.Test
+import java.lang.Thread.sleep
 
-class DbCreateUser: BasicUiHelper() {
+class DbCreateUser: TestBaseUI() {
 
+    private val jdbcClient = JDBCHelper()
+    private val userHelper = UserHelper()
     private val controllers = Controllers()
 
-
+    @Test
     @DisplayName("Create and check user with basic JDBC kotlin helper")
     @Tags(Tag("DB"),Tag("regress"),Tag("users"))
-    @ParameterizedTest(name = "Username: {0}, Email: {1}, Password: {2}")
-    @CsvSource("'testBasic','testBasic','testBasic'")
-    fun testCreateUserWithJdbcHelper(username: String, email: String, password: String) {
+    fun testCreateUserWithJdbcHelper() {
+        val username = "testDBuser"
+        val email = "testDBuser@testDBuser.com"
+        val password = "testDBuser"
+
         MainPage()
             .navigateHeader()
             .clickLink("Join")
@@ -31,21 +35,16 @@ class DbCreateUser: BasicUiHelper() {
         CreateAccountPopup()
             .joinAs(username, email, password)
 
-        val jdbcClient = JDBCHelper()
+        sleep(2000) //запись в бд идет дольше создания пользователя \ race-condition
 
         val users = jdbcClient.getUsers().firstOrNull { it.email == email}
-        println(users)
-
-        users?.let {
-            GarbageCollector.user.add(it.id)
-        }
+        userHelper.usersForGC(email)
 
         users shouldNotBe null
         users?.username shouldBe username
         users?.email shouldBe email
 
         val apiUser = controllers.users.getUserById(id = users!!.id).getAsObject()
-        println(apiUser)
 
         users shouldNotBe null
         users.username shouldBe apiUser.username

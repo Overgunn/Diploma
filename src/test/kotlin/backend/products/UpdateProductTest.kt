@@ -1,7 +1,10 @@
 package backend.products
 
 import backend.api.extensions.Extensions.Companion.getAsObject
+import backend.api.extensions.Extensions.Companion.getErrorAsObject
+import backend.api.models.ErrorResponse
 import backend.api.models.products.CreateProductRequest
+import backend.api.models.products.ProductErrorResponse.invalidProduct
 import backend.api.models.products.UpdateProductRequest
 import backend.controllers.Controllers
 import backend.helpers.AuthorizationHelper
@@ -35,11 +38,27 @@ class UpdateProductTest: Controllers() {
 
         val updatedProduct = products.updateProduct(token = userToken, id = product.id, body = updateProduct)?.getAsObject()
 
-        println(updatedProduct)
-        println(updateProduct)
-
         updatedProduct?.name shouldBe updateProduct.name
         updatedProduct?.price shouldBe updateProduct.price
         updatedProduct?.description shouldBe updateProduct.description
     }
+
+    @Test
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
+    @DisplayName("Update non-existent product")
+    fun updateNonexistentProduct() {
+        val userToken = authHelper.getNewToken()
+
+        val updateProduct = UpdateProductRequest(
+            name = "updated product name",
+            price = 1.33,
+            description = "updated description"
+        )
+
+        val updatedProduct = products.updateProduct(token = userToken, id = 0, body = updateProduct)
+        val error = updatedProduct?.getErrorAsObject<ErrorResponse>()
+
+        error shouldBe invalidProduct
+    }
 }
+//негативные кейсы

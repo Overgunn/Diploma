@@ -1,6 +1,6 @@
 package frontend.users.login
 
-import frontend.helpers.BasicUiHelper
+import frontend.helpers.TestBaseUI
 import frontend.components.popup.JoinPopup
 import frontend.components.popup.LoginPopup
 import frontend.pages.MainPage
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class LoginDialogTest: BasicUiHelper() {
+class LoginDialogTest: TestBaseUI() {
 
     @Test
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))

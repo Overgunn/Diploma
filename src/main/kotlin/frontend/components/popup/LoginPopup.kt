@@ -33,7 +33,7 @@ class LoginPopup {
     }
 
     @Step("Error text check for invalid credentials input")
-    fun getErrorText(expectedError: String): String {
+    fun getErrorText(): String {
         return errorMessageLogin.text
     }
 }

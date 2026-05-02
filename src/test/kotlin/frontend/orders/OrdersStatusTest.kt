@@ -4,8 +4,8 @@ import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.api.models.orders.UpdateOrderRequest
 import backend.controllers.Controllers
 import backend.helpers.AuthorizationHelper
-import backend.helpers.OrderHelper
-import frontend.helpers.BasicUiHelper
+import backend.helpers.OrderHelperBE
+import frontend.helpers.TestBaseUI
 import frontend.pages.OrdersPage
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class OrdersStatusTest: BasicUiHelper() {
+class OrdersStatusTest: TestBaseUI() {
 
-    val orderHelper = OrderHelper()
+    val orderHelper = OrderHelperBE()
     val controllers = Controllers()
     val authHelper = AuthorizationHelper()
 
@@ -31,11 +31,11 @@ class OrdersStatusTest: BasicUiHelper() {
             .open()
             .enterOrderId(testOrder.id)
             .getOrderItems()
-            .firstOrNull { it.orderId == testOrder.id }
+            .single { it.orderId == testOrder.id }
 
         orderCheck shouldNotBe null
-        orderCheck?.orderId shouldBe testOrder.id
-        orderCheck?.status shouldBe "PENDING"
+        orderCheck.orderId shouldBe testOrder.id
+        orderCheck.status shouldBe "PENDING"
     }
 
     @Test
@@ -46,11 +46,15 @@ class OrdersStatusTest: BasicUiHelper() {
         val userToken = authHelper.getNewToken()
         val testOrder = orderHelper.createOrderWithRandomProduct()
 
+        //testOrder.status shouldBe "PENDING"
+
         val updatedOrder = controllers.orders.updateOrderById(
             token = userToken,
             id = testOrder.id,
             body = UpdateOrderRequest(orderStatus = "IN_PROGRESS")
         ).getAsObject()
+
+            //проверить, что первоначально статус был PENDING(проверка на несовпадение статусов)
 
         val orderUpdate = OrdersPage()
             .open()
