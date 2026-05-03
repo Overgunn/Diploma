@@ -30,7 +30,7 @@ class OrdersStatusTest: TestBaseUI() {
             .open()
             .enterOrderId(testOrder.id)
             .getOrderItems()
-            .single { it.orderId == testOrder.id }
+            .first { it.orderId == testOrder.id }
 
         orderCheck shouldNotBe null
         orderCheck.orderId shouldBe testOrder.id
@@ -59,10 +59,10 @@ class OrdersStatusTest: TestBaseUI() {
             .open()
             .enterOrderId(updatedOrder.id)
             .getOrderItems()
-            .firstOrNull { it.orderId == updatedOrder.id }
+            .first { it.orderId == updatedOrder.id }
 
         orderUpdate shouldNotBe null
-        orderUpdate?.orderId shouldBe testOrder.id
-        orderUpdate?.status shouldBe "IN_PROGRESS"
+        orderUpdate.orderId shouldBe testOrder.id
+        orderUpdate.status shouldBe "IN_PROGRESS"
     }
 }

@@ -1,18 +1,17 @@
 package frontend.components.list
 
-import com.codeborne.selenide.ElementsCollection
 import com.codeborne.selenide.Selenide.elements
 import frontend.helpers.Extensions.Companion.toMoney
 import frontend.helpers.Wrappers.Companion.byDataTestGroup
+import io.qameta.allure.Step
 import kotlin.text.trim
 
-class OrderItems(val items: ElementsCollection) {
+class OrderItems {
 
     private val orderItems = elements(byDataTestGroup("order-card"))
 
-    fun getItems(): List<OrderItem> {
-        return orderItems
-            .map {
+    @Step("Get order items list")
+    fun getItems(): List<OrderItem> = orderItems.map {
                 OrderItem(
                     orderId = it.find(byDataTestGroup("order-id")).text
                         .replace("Order ID: ", "")
@@ -33,7 +32,6 @@ class OrderItems(val items: ElementsCollection) {
                 )
             }
     }
-}
 
 data class OrderItem(
     val orderId: Int,

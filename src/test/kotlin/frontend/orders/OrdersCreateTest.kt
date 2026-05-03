@@ -18,8 +18,8 @@ class OrdersCreateTest: TestBaseUI() {
     private val orderHelper = OrderHelperFE()
 
     @Test
-    @Tags( Tag("frontend"),Tag("regress"),Tag("orders"))
     @DisplayName("Create an order and check it on orders page")
+    @Tags( Tag("frontend"),Tag("regress"),Tag("orders"))
     fun createOrder() {
         MainPage().open().getPopularProducts().first().btnIncrement.click()
         val mainPageItem = MainPage().getPopularProducts().first()

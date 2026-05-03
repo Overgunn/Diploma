@@ -1,5 +1,6 @@
 package frontend.pages
 
+import com.codeborne.selenide.CollectionCondition
 import com.codeborne.selenide.ElementsCollection
 import com.codeborne.selenide.Selectors.shadowCss
 import com.codeborne.selenide.Selenide
@@ -40,7 +41,8 @@ class OrdersPage {
 
     @Step("Get products object list")
     fun getOrderItems(): List<OrderItem> {
-        return OrderItems(orderItems).getItems()
+        orderItems.shouldHave(CollectionCondition.sizeGreaterThan(0)) //добавил еще одно ожидание из-за RC
+        return OrderItems().getItems()
     }
 
     @Step("Get error message")

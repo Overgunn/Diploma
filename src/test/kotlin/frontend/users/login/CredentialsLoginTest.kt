@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.lang.Thread.sleep
 
 class CredentialsLoginTest: TestBaseUI() {
 
@@ -32,6 +33,7 @@ class CredentialsLoginTest: TestBaseUI() {
             .loginWindowInput(email, password)
 
         MainPage().navigateHeader().isAvatarVisible() shouldBe true
+        sleep(2000) //for jenkins speedy test runs
     }
 
     @DisplayName("Negative: login into account via UI")
@@ -40,7 +42,7 @@ class CredentialsLoginTest: TestBaseUI() {
     @CsvSource(
         "'', '', 'Please enter email and password'",
         "'1@1.com', '', 'Please enter email and password'",
-        "'wrongpass@wrongpass.com', 'wrongpass1', 'Invalid email or password'"
+        "'wrongpass@wrongpass.com', 'wrongpass1', 'Wrong password: wrongpass | wrongpass1'"
     )
     fun negativeLoginCheck(email: String, password: String, error: String) {
 

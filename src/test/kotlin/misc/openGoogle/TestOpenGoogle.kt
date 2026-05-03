@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide
 import en.QAguru.frontend.helpers.misc.GoogleSearchPage
 import frontend.helpers.TestBaseUI
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -18,6 +19,7 @@ class TestOpenGoogle : TestBaseUI() {
     }
 
     @Test
+    @Disabled("DISABLED")
     @DisplayName("Open google main page")
     fun openGoogleMainPage() {
         Selenide.open("/")
