@@ -15,7 +15,7 @@ class LoginDialogTest: TestBaseUI() {
     @Test
     @DisplayName("Check login window popup")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
-    fun loginDialogPopup() {
+    fun loginDialogPopupCheck() {
         MainPage()
             .navigateHeader()
             .clickLink("Join")

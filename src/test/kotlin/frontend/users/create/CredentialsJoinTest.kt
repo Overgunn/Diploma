@@ -19,7 +19,7 @@ class CredentialsJoinTest: TestBaseUI() {
     @Test
     @DisplayName("Create account validation test via UI")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
-    fun createAccountTest() {
+    fun createAccountCheck() {
         val username = "testBasic"
         val email = "testBasic@testBasic.com"
         val password = "testBasic"
@@ -42,7 +42,7 @@ class CredentialsJoinTest: TestBaseUI() {
         "'user', '', '', 'Please enter username, email and password'",
         "'user', 'user@user.com', '', 'Please enter username, email and password'",
         "'nonexistentUser1','nonexistantUser1@nonexistantUser1.com','nonexistentUser1', 'Something went wrong. Please verify request.'")
-    fun createAccountValidation(username: String, email: String, password: String, expectedError: String) {
+    fun createAccountValidationCheck(username: String, email: String, password: String, expectedError: String) {
 
         MainPage().navigateHeader().clickLink("Join")
 

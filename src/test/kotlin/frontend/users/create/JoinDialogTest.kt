@@ -14,7 +14,7 @@ class JoinDialogTest: TestBaseUI() {
     @Test
     @DisplayName("Check popup window after clicking 'Join' header button")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
-    fun joinDialogPopup() {
+    fun joinDialogPopupCheck() {
         MainPage()
             .navigateHeader()
             .clickLink("Join")

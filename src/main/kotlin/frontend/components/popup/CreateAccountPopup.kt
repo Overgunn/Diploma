@@ -13,7 +13,7 @@ class CreateAccountPopup {
     private val submitButton get() = element(byDataTestId("create-submit"))
     private val errorMessage get() = element(byDataTestId("create-error"))
 
-    @Step("Check user login with given credentials")
+    @Step("User logs in with given credentials")
     fun joinAs(username: String, email: String, password: String): CreateAccountPopup {
         usernameInput.value = username
         emailInput.value = email
@@ -21,7 +21,7 @@ class CreateAccountPopup {
         submitButton.click()
         return this
     }
-    @Step("Error text check for invalid credentials input")
+    @Step("Errors for invalid credentials")
     fun getJoinErrorMessage(): String {
         return errorMessage.text
     }
