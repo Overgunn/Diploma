@@ -10,7 +10,7 @@ import io.qameta.allure.Step
 
 class HeaderComponent {
     private val linksHeader get() = elements(byDataTestGroup("nav-link"))
-    private val headerUserPic: SelenideElement get() = element("img.avatar[alt='Avatar']")
+    private val headerUserPic: SelenideElement get() = element("img.avatar")
 
     @Step("Clicks header {name} link")
     fun clickLink(name: String): HeaderComponent {
