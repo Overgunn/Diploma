@@ -5,7 +5,7 @@ import java.sql.ResultSet
 import java.sql.Statement
 import kotlin.use
 
-class JDBCHelper { // вернуть сюда Exposed(отдельным файлом)
+class JDBCHelper {
 
     private val jdbcUrl = "jdbc:postgresql://localhost:5432/playground"
     private val username: String = "postgres"
