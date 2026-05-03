@@ -1,4 +1,4 @@
-package database
+package database.helpers
 
 import java.sql.DriverManager
 import java.sql.ResultSet

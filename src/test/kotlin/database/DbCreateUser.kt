@@ -2,6 +2,8 @@ package database
 
 import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.controllers.Controllers
+import database.helpers.ExposedHelper
+import database.helpers.JDBCHelper
 import frontend.helpers.UserHelper
 import frontend.components.popup.CreateAccountPopup
 import frontend.helpers.TestBaseUI
@@ -37,14 +39,44 @@ class DbCreateUser: TestBaseUI() {
 
         sleep(2000) //запись в бд идет дольше создания пользователя \ race-condition
 
-        val users = jdbcClient.getUsers().firstOrNull { it.email == email}
+        val users = jdbcClient.getUsers().first { it.email == email}
         userHelper.usersForGC(email)
 
         users shouldNotBe null
-        users?.username shouldBe username
-        users?.email shouldBe email
+        users.username shouldBe username
+        users.email shouldBe email
 
-        val apiUser = controllers.users.getUserById(id = users!!.id).getAsObject()
+        val apiUser = controllers.users.getUserById(id = users.id).getAsObject()
+
+        users shouldNotBe null
+        users.username shouldBe apiUser.username
+        users.email shouldBe apiUser.email
+    }
+
+    @Test
+    @DisplayName("Create and check user with Exposed DB helper")
+    @Tags(Tag("DB"),Tag("regress"),Tag("users"))
+    fun testCreateUserWithExposedHelper() {
+        val exposedHelper = ExposedHelper()
+        val username = "testExposed"
+        val email = "testExposed@testExposed.com"
+        val password = "testExposed"
+
+        MainPage()
+            .navigateHeader()
+            .clickLink("Join")
+
+        CreateAccountPopup()
+            .joinAs(username, email, password)
+        userHelper.usersForGC(email)
+
+        val users = exposedHelper.getAllUsersExposed().first { it.email == email}
+
+        users shouldNotBe null
+        users.username shouldBe username
+        users.email shouldBe email
+
+        val apiUser = controllers.users.getUserById(id = users.id).getAsObject()
 
         users shouldNotBe null
         users.username shouldBe apiUser.username
