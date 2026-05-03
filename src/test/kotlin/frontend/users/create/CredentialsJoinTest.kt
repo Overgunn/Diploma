@@ -41,7 +41,7 @@ class CredentialsJoinTest: TestBaseUI() {
         "'', '', '', 'Please enter username, email and password'",
         "'user', '', '', 'Please enter username, email and password'",
         "'user', 'user@user.com', '', 'Please enter username, email and password'",
-        "'q','q',q', 'Something went wrong. Please verify request.'")
+        "'nonexistentUser1','nonexistantUser1@nonexistantUser1.com','nonexistentUser1', 'Something went wrong. Please verify request.'")
     fun createAccountValidation(username: String, email: String, password: String, expectedError: String) {
 
         MainPage().navigateHeader().clickLink("Join")
