@@ -36,11 +36,11 @@ class DbCreateUser: TestBaseUI() {
 
         CreateAccountPopup()
             .joinAs(username, email, password)
+        userHelper.usersForGC(email)
 
-        sleep(2000) //запись в бд идет дольше создания пользователя \ race-condition
+        sleep(2000) // race-condition
 
         val users = jdbcClient.getUsers().first { it.email == email}
-        userHelper.usersForGC(email)
 
         users shouldNotBe null
         users.username shouldBe username

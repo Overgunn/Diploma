@@ -11,9 +11,9 @@ class OrderHelperBE: Controllers() {
 
     private val productHelper = ProductHelper()
 
-    @Step("Create order with random product")
-    fun createOrderWithRandomProduct(): CreateOrderResponse {
-        val product = productHelper.createRandomProduct()
+    @Step("Create an order for test purposes")
+    fun createOrderWithProduct(): CreateOrderResponse {
+        val product = productHelper.createProductForOrder()
         return orders.createNewOrder(
             order = CreateOrderRequest(
                 userId = null,

@@ -58,13 +58,13 @@ class ProductHelper: Controllers() {
         return listOfProducts.toList()
     }
 
-    @Step("Create random product")
-    fun createRandomProduct(): CreateProductResponse {
+    @Step("Create product for order")
+    fun createProductForOrder(): CreateProductResponse {
         return products.createProduct(
             product = CreateProductRequest(
                 name = "Test product",
                 price = 3.0,
-                description = "Random test product for orders"
+                description = "Test product for orders"
             )
         ).getAsObject()
     }

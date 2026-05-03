@@ -11,7 +11,7 @@ open class TestBaseUI {
         Configuration.baseUrl = "http://localhost:4000"
         Configuration.pageLoadStrategy = "normal"
         Configuration.reopenBrowserOnFail = true
-        Configuration.timeout = 10000
+        Configuration.timeout = 6000
         //Configuration.browser = DriverProvider::class.java.name
     }
 
