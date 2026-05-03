@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.lang.Thread.sleep
 
 class CredentialsLoginTest: TestBaseUI() {
 
@@ -33,7 +32,6 @@ class CredentialsLoginTest: TestBaseUI() {
             .loginWindowInput(email, password)
 
         MainPage().navigateHeader().isAvatarVisible() shouldBe true
-        sleep(2000) //for jenkins speedy test runs
     }
 
     @DisplayName("Negative: login into account via UI")

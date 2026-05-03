@@ -26,6 +26,7 @@ class HeaderComponent {
     @Step("Checks if avatar is present on the header after successful logging in")
     fun isAvatarVisible(): Boolean {
         headerUserPic.shouldBe(Condition.appear)
+        headerUserPic.shouldBe(Condition.visible)
         return headerUserPic.isDisplayed
     }
 
