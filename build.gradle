@@ -23,6 +23,12 @@ test {
             includeTags System.getProperty("TAGS")
         }
     }
+    useJUnitPlatform {
+        def tags = System.getProperty("groups")
+        if (tags) {
+            includeTags tags
+        }
+    }
 
     dependsOn 'cleanTest'
     testLogging {
