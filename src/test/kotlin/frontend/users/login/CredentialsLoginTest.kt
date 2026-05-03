@@ -31,7 +31,8 @@ class CredentialsLoginTest: TestBaseUI() {
         LoginPopup()
             .loginWindowInput(email, password)
 
-        MainPage().navigateHeader().isAvatarVisible() shouldBe true
+        MainPage().navigateHeader().headerAvatarPic() shouldBe true
+        MainPage().navigateHeader().headerLogoutButton() shouldBe true
     }
 
     @DisplayName("Negative: login into account via UI")

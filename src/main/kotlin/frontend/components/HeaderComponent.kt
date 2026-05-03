@@ -6,11 +6,16 @@ import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
 import frontend.components.popup.CartPopup
 import frontend.helpers.Wrappers.Companion.byDataTestGroup
+import frontend.helpers.Wrappers.Companion.byDataTestId
 import io.qameta.allure.Step
 
 class HeaderComponent {
+
     private val linksHeader get() = elements(byDataTestGroup("nav-link"))
+
     private val headerUserPic: SelenideElement get() = element("img.avatar")
+
+    private val logoutButton get() = element(byDataTestId("nav-link-auth"))
 
     @Step("Clicks header {name} link")
     fun clickLink(name: String): HeaderComponent {
@@ -24,10 +29,21 @@ class HeaderComponent {
     }
 
     @Step("Checks if avatar is present on the header after successful logging in")
-    fun isAvatarVisible(): Boolean {
+    fun headerAvatarPic(): Boolean {
         headerUserPic.shouldBe(Condition.appear)
         headerUserPic.shouldBe(Condition.visible)
         return headerUserPic.isDisplayed
+    }
+
+    @Step("Checks if avatar is present on the header after successful logging in")
+    fun headerLogoutButton(): Boolean {
+        return logoutButton.isDisplayed
+    }
+
+    @Step("Checks if avatar is present on the header after successful logging in")
+    fun headerLogoutButtonClick(): HeaderComponent {
+        logoutButton.click()
+        return this
     }
 
     @Step("Get cart popup")

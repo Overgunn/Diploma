@@ -30,7 +30,8 @@ class CredentialsJoinTest: TestBaseUI() {
             .joinAs(username, email, password)
         userHelper.usersForGC(email)
 
-        MainPage().navigateHeader().isAvatarVisible() shouldBe true
+        MainPage().navigateHeader().headerAvatarPic() shouldBe true
+        MainPage().navigateHeader().headerLogoutButton() shouldBe true
     }
 
     @DisplayName("Negative: create account via UI using invalid credentials")

@@ -13,7 +13,7 @@ class CartPopup {
         return cartPopupTotalSum.text
     }
 
-    @Step("Checkout button")
+    @Step("Click checkout button")
     fun checkoutButtonClick(): OrderPopup {
         cartCheckoutButton.click()
         return OrderPopup()
