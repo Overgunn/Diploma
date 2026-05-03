@@ -10,7 +10,7 @@ import io.qameta.allure.Step
 
 class HeaderComponent {
     private val linksHeader get() = elements(byDataTestGroup("nav-link"))
-    private val headerUserPic: SelenideElement get() = element(".avatar")
+    private val headerUserPic: SelenideElement get() = element("img.avatar[alt='Avatar']")
 
     @Step("Clicks header {name} link")
     fun clickLink(name: String): HeaderComponent {
@@ -25,7 +25,7 @@ class HeaderComponent {
 
     @Step("Checks if avatar is present on the header after successful logging in")
     fun isAvatarVisible(): Boolean {
-        headerUserPic.shouldBe(Condition.visible)
+        headerUserPic.shouldBe(Condition.appear)
         return headerUserPic.isDisplayed
     }
 
