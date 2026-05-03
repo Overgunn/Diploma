@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test
 class LoginDialogTest: TestBaseUI() {
 
     @Test
+    @DisplayName("Check login window popup")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
-    @DisplayName("Check if login window will open after clicking 'Your account' link")
     fun loginDialogPopup() {
         MainPage()
             .navigateHeader()

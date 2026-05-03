@@ -19,7 +19,7 @@ class OrdersCreateTest: TestBaseUI() {
 
     @Test
     @Tags( Tag("frontend"),Tag("regress"),Tag("orders"))
-    @DisplayName("Create an order from main page and check order popup window")
+    @DisplayName("Create an order and check it on orders page")
     fun createOrder() {
         MainPage().open().getPopularProducts().first().btnIncrement.click()
         val mainPageItem = MainPage().getPopularProducts().first()
@@ -40,5 +40,18 @@ class OrdersCreateTest: TestBaseUI() {
 
         orderedItems.size.shouldBe(1)
         mainPageItem.name shouldBe orderedItems.first().name
+    }
+
+    @Test
+    @DisplayName("Check non-existent order ID")
+    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
+    fun findNonexistentOrder() {
+        MainPage().navigateHeader().clickLink("Orders")
+
+        val orderId = 0
+        OrdersPage()
+            .open()
+            .enterOrderId(orderId)
+            .getOrderErrorMessage("Order with id:$orderId not found")
     }
 }

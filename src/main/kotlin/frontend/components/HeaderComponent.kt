@@ -1,5 +1,6 @@
 package frontend.components
 
+import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
@@ -24,6 +25,7 @@ class HeaderComponent {
 
     @Step("Checks if avatar is present on the header after successful logging in")
     fun isAvatarVisible(): Boolean {
+        headerUserPic.shouldBe(Condition.visible)
         return headerUserPic.isDisplayed
     }
 

@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test
 class CreateOrderTest: Controllers() {
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Create and get order")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun createOrder() {
 
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
@@ -31,8 +31,8 @@ class CreateOrderTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Get non existing order")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun getNonExistingOrder() {
         val allOrders = orders.getOrders().getAsObject()
 
@@ -40,8 +40,8 @@ class CreateOrderTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Create and get order from an offset and limit")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun getOrderFromOffsetAndLimit() {
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
         val page1 = orders.getOrders(offset = 0, limit = 50).getAsObject()
@@ -50,8 +50,8 @@ class CreateOrderTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Create an order with non-existing product and get error")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun createOrderWithNonExistingProduct() {
 
     val response = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(0))))
@@ -61,8 +61,8 @@ class CreateOrderTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Get an order by id")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun getOrderByIdCheck() {
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
         val createdOrder = orders.getOrdersById(id = order.id).getAsObject()

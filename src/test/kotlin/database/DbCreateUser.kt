@@ -23,8 +23,8 @@ class DbCreateUser: TestBaseUI() {
     private val controllers = Controllers()
 
     @Test
-    @DisplayName("Create and check user with basic JDBC kotlin helper")
     @Tags(Tag("DB"),Tag("regress"),Tag("users"))
+    @DisplayName("Create and check user with basic JDBC kotlin helper")
     fun testCreateUserWithJdbcHelper() {
         val username = "testDBuser"
         val email = "testDBuser@testDBuser.com"
@@ -54,8 +54,8 @@ class DbCreateUser: TestBaseUI() {
     }
 
     @Test
-    @DisplayName("Create and check user with Exposed DB helper")
     @Tags(Tag("DB"),Tag("regress"),Tag("users"))
+    @DisplayName("Create and check user with Exposed DB helper")
     fun testCreateUserWithExposedHelper() {
         val exposedHelper = ExposedHelper()
         val username = "testExposed"

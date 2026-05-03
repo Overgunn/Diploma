@@ -16,8 +16,8 @@ class DeleteOrderTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Create and delete order")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun deleteOrderCheck() {
 
         val userToken = authHelper.getNewToken()
@@ -28,8 +28,8 @@ class DeleteOrderTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Delete non-existent order")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun deleteNonexistentOrder() {
         val userToken = authHelper.getNewToken()
         val delete = orders.deleteOrder(token = userToken, 0)

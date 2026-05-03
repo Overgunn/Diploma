@@ -21,10 +21,9 @@ class OrdersStatusTest: TestBaseUI() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
     @DisplayName("Create, and check order status via UI")
+    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
     fun orderStatusCheck() {
-
         val testOrder = orderHelper.createOrderWithRandomProduct()
 
         val orderCheck = OrdersPage()
@@ -39,14 +38,14 @@ class OrdersStatusTest: TestBaseUI() {
     }
 
     @Test
+    @DisplayName("Create and update order status, check updated status via UI")
     @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
-    @DisplayName("Create, and update order status, and check status via UI")
     fun orderStatusUpdateCheck() {
 
         val userToken = authHelper.getNewToken()
         val testOrder = orderHelper.createOrderWithRandomProduct()
 
-        //testOrder.status shouldBe "PENDING"
+        testOrder.orderStatus shouldBe "PENDING"
 
         val updatedOrder = controllers.orders.updateOrderById(
             token = userToken,
@@ -54,7 +53,7 @@ class OrdersStatusTest: TestBaseUI() {
             body = UpdateOrderRequest(orderStatus = "IN_PROGRESS")
         ).getAsObject()
 
-            //проверить, что первоначально статус был PENDING(проверка на несовпадение статусов)
+        updatedOrder.orderStatus shouldNotBe "PENDING"
 
         val orderUpdate = OrdersPage()
             .open()

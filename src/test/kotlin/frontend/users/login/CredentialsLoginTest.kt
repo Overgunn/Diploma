@@ -4,6 +4,7 @@ import frontend.components.popup.JoinPopup
 import frontend.components.popup.LoginPopup
 import frontend.helpers.TestBaseUI
 import frontend.pages.MainPage
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
@@ -14,9 +15,9 @@ import org.junit.jupiter.params.provider.CsvSource
 class CredentialsLoginTest: TestBaseUI() {
 
     @Test
-    @DisplayName("Parametrized login validation positive test")
+    @DisplayName("Login into account via UI")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
-    fun loginValidation() {
+    fun loginCheck() {
         val email = "positiveLoginTest@positiveLoginTest.com"
         val password = "positiveLoginTest"
 
@@ -30,18 +31,18 @@ class CredentialsLoginTest: TestBaseUI() {
         LoginPopup()
             .loginWindowInput(email, password)
 
-        MainPage().navigateHeader().isAvatarVisible() //поправить проверку, что аватар shouldBe true
+        MainPage().navigateHeader().isAvatarVisible() shouldBe true
     }
 
-    @DisplayName("Parametrized login validation negative test")
+    @DisplayName("Negative: login into account via UI")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @ParameterizedTest(name = "Email {0}, Password: {1}, Error: {2}")
     @CsvSource(
         "'', '', 'Please enter email and password'",
         "'1@1.com', '', 'Please enter email and password'",
-        "'1@1.com', '111', 'Invalid email or password'"
+        "'wrongpass@wrongpass.com', 'wrongpass1', 'Invalid email or password'"
     )
-    fun loginValidation(email: String, password: String) {
+    fun negativeLoginCheck(email: String, password: String, error: String) {
 
         MainPage()
             .navigateHeader()
@@ -52,6 +53,6 @@ class CredentialsLoginTest: TestBaseUI() {
 
         LoginPopup()
             .loginWindowInput(email, password)
-            .getErrorText() //добавить проверку на полученный результат, вынести ошибки в UI error ENUM
+            .getErrorText() shouldBe error
     }
 }

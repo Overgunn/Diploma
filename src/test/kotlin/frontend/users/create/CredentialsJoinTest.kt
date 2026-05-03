@@ -17,7 +17,7 @@ class CredentialsJoinTest: TestBaseUI() {
     private val userHelper = UserHelper()
 
     @Test
-    @DisplayName("Create account test")
+    @DisplayName("Create account validation test via UI")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     fun createAccountTest() {
         val username = "testBasic"
@@ -28,19 +28,19 @@ class CredentialsJoinTest: TestBaseUI() {
 
         CreateAccountPopup()
             .joinAs(username, email, password)
-
-        MainPage().navigateHeader().isAvatarVisible()
         userHelper.usersForGC(email)
+
+        MainPage().navigateHeader().isAvatarVisible() shouldBe true
     }
 
-    @DisplayName("Parametrized create account validation negative test")
+    @DisplayName("Negative: create account via UI using invalid credentials")
     @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @ParameterizedTest(name = "Username: {0}, Email {1}, Password: {2}, Error: {3}")
     @CsvSource(
         "'', '', '', 'Please enter username, email and password'",
         "'user', '', '', 'Please enter username, email and password'",
         "'user', 'user@user.com', '', 'Please enter username, email and password'",
-        "'wrongpass','wrongpass@wrongpass.com',wrongpass1', 'Something went wrong. Please verify request.'")
+        "'q','q',q', 'Something went wrong. Please verify request.'")
     fun createAccountValidation(username: String, email: String, password: String, expectedError: String) {
 
         MainPage().navigateHeader().clickLink("Join")

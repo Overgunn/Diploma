@@ -19,8 +19,8 @@ class CreateProductTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     @DisplayName("Create and get product")
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     fun createProductCheck() {
         val userToken = authHelper.getNewToken()
 
@@ -37,8 +37,8 @@ class CreateProductTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     @DisplayName("Create product with invalid data and check error")
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     fun createProductWithInvalidData() {
         val userToken = authHelper.getNewToken()
 
@@ -53,4 +53,3 @@ class CreateProductTest: Controllers() {
         error shouldBe invalidInput
     }
 }
-//негативные кейсы

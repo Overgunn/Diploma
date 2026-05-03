@@ -19,8 +19,8 @@ class DeleteProductTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     @DisplayName("Create and delete product")
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     fun deleteProduct() {
         val userToken = authHelper.getNewToken()
 
@@ -36,8 +36,8 @@ class DeleteProductTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     @DisplayName("Create and delete product")
+    @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     fun deleteNonexistentProduct() {
         val userToken = authHelper.getNewToken()
 
@@ -47,4 +47,3 @@ class DeleteProductTest: Controllers() {
         error shouldBe invalidProduct
     }
 }
-//негативные кейсы

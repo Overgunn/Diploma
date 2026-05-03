@@ -16,9 +16,9 @@ class OrdersPopupTest: TestBaseUI() {
     private val orderHelper = OrderHelperFE()
 
     @Test
+    @DisplayName("Create an order and check order popup window")
     @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
-    @DisplayName("Create an order from main page and check order popup window")
-    fun ordersCheckPopupWindow() {
+    fun ordersPopupInfoCheck() {
         val firstPopularItem = MainPage().open().getPopularProducts().first()
         firstPopularItem.btnIncrement.click()
 

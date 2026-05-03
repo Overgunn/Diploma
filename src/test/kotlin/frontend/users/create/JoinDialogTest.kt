@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test
 class JoinDialogTest: TestBaseUI() {
 
     @Test
-    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     @DisplayName("Check popup window after clicking 'Join' header button")
+    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
     fun joinDialogPopup() {
         MainPage()
             .navigateHeader()

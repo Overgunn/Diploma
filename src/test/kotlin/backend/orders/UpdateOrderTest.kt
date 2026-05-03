@@ -22,8 +22,8 @@ class UpdateOrderTest: Controllers() {
     val authHelper = AuthorizationHelper()
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Update order status test")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun updateOrderStatusCheck() {
         val userToken = authHelper.getNewToken()
 
@@ -40,6 +40,7 @@ class UpdateOrderTest: Controllers() {
     }
 
 
+    @DisplayName("Update order status test using all available statuses")
     @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @ParameterizedTest(name = "Update order status to: {0}")
     @ValueSource(strings = ["PENDING", "IN_PROGRESS", "COMPLETED"])
@@ -61,8 +62,8 @@ class UpdateOrderTest: Controllers() {
     }
 
     @Test
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     @DisplayName("Update order with invalid status")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun updateNonexistentOrderStatusCheck() {
         val userToken = authHelper.getNewToken()
 
@@ -79,4 +80,3 @@ class UpdateOrderTest: Controllers() {
         error shouldBe wrongOrderStatus
     }
 }
-//негативные кейсы(невалидный статус)
