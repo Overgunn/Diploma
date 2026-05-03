@@ -12,7 +12,6 @@ open class TestBaseUI {
         Configuration.pageLoadStrategy = "normal"
         Configuration.reopenBrowserOnFail = true
         Configuration.timeout = 10000
-        Configuration.headless = true
         //Configuration.browser = DriverProvider::class.java.name
     }
 
