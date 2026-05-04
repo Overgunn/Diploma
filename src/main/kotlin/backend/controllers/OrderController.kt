@@ -16,12 +16,12 @@ class OrderController: Endpoints() {
     val authHelper = AuthorizationHelper()
 
     @Step("Get all orders")
-    fun getOrders(token: String = authHelper.getAdminToken(), offset: Int = 0, limit: Int = 50): Response<List<CreateOrderResponse>> {
-        return orders.getOrder(token,offset,limit).execute()
+    fun getAllOrders(token: String = authHelper.getAdminToken(), offset: Int = 0, limit: Int = 50): Response<List<CreateOrderResponse>> {
+        return orders.getAllOrders(token,offset,limit).execute()
     }
 
     @Step("Get order with id: {id}")
-    fun getOrdersById(id: Any): Response<CreateOrderResponse> {
+    fun getOrderById(id: Any): Response<CreateOrderResponse> {
         return orders.getOrderById(id).execute()
     }
 

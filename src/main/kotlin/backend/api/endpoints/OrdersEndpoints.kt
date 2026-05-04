@@ -18,7 +18,7 @@ import retrofit2.http.Query
 interface OrdersEndpoints {
 
     @GET("orders/")
-    fun getOrder(@Header(Headers.AUTHORIZATION) token: String, @Query("offset") offset: Int, @Query("limit") limit: Int): Call<List<CreateOrderResponse>>
+    fun getAllOrders(@Header(Headers.AUTHORIZATION) token: String, @Query("offset") offset: Int, @Query("limit") limit: Int): Call<List<CreateOrderResponse>>
 
     @GET("orders/{id}")
     fun getOrderById(@Path("id") id: Any): Call<CreateOrderResponse>

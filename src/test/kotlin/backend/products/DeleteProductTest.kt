@@ -36,7 +36,7 @@ class DeleteProductTest: Controllers() {
     }
 
     @Test
-    @DisplayName("Create and delete product")
+    @DisplayName("Delete non-existent product")
     @Tags(Tag("regress"),Tag("backend"),Tag("products"))
     fun deleteNonexistentProduct() {
         val userToken = authHelper.getNewToken()

@@ -25,18 +25,19 @@ class CreateOrderTest: Controllers() {
     fun createOrder() {
 
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
-        val allOrders = orders.getOrders().getAsObject()
+        val allOrders = orders.getAllOrders().getAsObject()
 
         order shouldBeIn allOrders
     }
 
     @Test
-    @DisplayName("Get non existing order")
+    @DisplayName("Get an order by id")
     @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
-    fun getNonExistingOrder() {
-        val allOrders = orders.getOrders().getAsObject()
+    fun getOrderByIdCheck() {
+        val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
+        val createdOrder = orders.getOrderById(id = order.id).getAsObject()
 
-        allOrders.shouldNotContain(-1)
+        createdOrder shouldBeEqual order
     }
 
     @Test
@@ -44,9 +45,18 @@ class CreateOrderTest: Controllers() {
     @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun getOrderFromOffsetAndLimit() {
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
-        val page1 = orders.getOrders(offset = 0, limit = 50).getAsObject()
+        val page1 = orders.getAllOrders(offset = 0, limit = 50).getAsObject()
 
         page1 shouldContain order
+    }
+
+    @Test
+    @DisplayName("Get non existing order from all orders in 0 offset")
+    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    fun getNonExistingOrder() {
+        val allOrders = orders.getAllOrders().getAsObject()
+
+        allOrders.shouldNotContain(0)
     }
 
     @Test
@@ -58,15 +68,5 @@ class CreateOrderTest: Controllers() {
     val error = response.getErrorAsObject<ErrorResponse>()
 
     error shouldBe invalidOrderProduct
-    }
-
-    @Test
-    @DisplayName("Get an order by id")
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
-    fun getOrderByIdCheck() {
-        val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
-        val createdOrder = orders.getOrdersById(id = order.id).getAsObject()
-
-        createdOrder shouldBeEqual order
     }
 }
