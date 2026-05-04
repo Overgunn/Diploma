@@ -23,7 +23,7 @@ interface OrdersEndpoints {
     @GET("orders/{id}")
     fun getOrderById(@Path("id") id: Any): Call<CreateOrderResponse>
 
-    @GET("orders/users/{id}")
+    @GET("orders/user/{id}")
     fun getOrderByUserId(@Path("id") id: Any): Call<List<CreateOrderResponse>>
 
     @POST("orders/create")

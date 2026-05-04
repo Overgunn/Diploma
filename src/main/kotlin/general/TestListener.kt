@@ -37,6 +37,12 @@ class TestListener: Controllers(), TestExecutionListener {
         println("|------ Test cycle finished -----|")
         Selenide.closeWebDriver()
         println("|------ Garbage collector -------|")
+
+        GarbageCollector.order.forEach { id ->
+            orders.deleteOrder(token = authHelper.getAdminToken(), id = id)
+                .also { println("Deleted order: $id") }
+        }
+
         GarbageCollector.user.forEach { id ->
             users.deleteUserById(token = authHelper.getAdminToken(), id = id)
                 .also {println("Deleted user: $id")}
@@ -45,11 +51,6 @@ class TestListener: Controllers(), TestExecutionListener {
         GarbageCollector.products.forEach { id ->
             products.deleteProductById(token = authHelper.getAdminToken(), id = id)
                 .also { println("Deleted product: $id") }
-        }
-
-        GarbageCollector.order.forEach { id ->
-            orders.deleteOrder(token = authHelper.getAdminToken(), id = id)
-                .also { println("Deleted order: $id") }
         }
     }
 }

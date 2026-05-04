@@ -35,7 +35,7 @@ class CreateOrderTest: Controllers() {
     @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
     fun getOrderByIdCheck() {
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
-        val createdOrder = orders.getOrderById(id = order.id).getAsObject()
+        val createdOrder = orders.getOrdersById(id = order.id).getAsObject()
 
         createdOrder shouldBeEqual order
     }

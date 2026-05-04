@@ -21,7 +21,7 @@ class OrderController: Endpoints() {
     }
 
     @Step("Get order with id: {id}")
-    fun getOrderById(id: Any): Response<CreateOrderResponse> {
+    fun getOrdersById(id: Any): Response<CreateOrderResponse> {
         return orders.getOrderById(id).execute()
     }
 

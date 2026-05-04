@@ -11,6 +11,7 @@ class JDBCHelper {
     private val username: String = "postgres"
     private val password: String= "postgres"
     private val client = DriverManager.getConnection(jdbcUrl, username, password)
+    private fun getConnection() = DriverManager.getConnection(jdbcUrl, username, password)
 
     fun getProducts(): List<Product> {
         val products = mutableListOf<Product>()
@@ -37,7 +38,7 @@ class JDBCHelper {
         return products
     }
 
-    fun getProductNew() = client.use { connection ->
+    fun getProductNew() = getConnection().use { connection ->
         connection.createStatement().use { statement ->
             statement.executeQuery("SELECT * FROM table_products").use { resultSet ->
                 generateSequence { resultSet.takeIf { it.next() }?.toProduct() }.toList()
@@ -70,12 +71,49 @@ class JDBCHelper {
         return users
     }
 
-    fun getNewUser() = client.use { connection ->
+    fun getNewUser() = getConnection().use { connection ->
         connection.createStatement().use { statement ->
             statement.executeQuery("SELECT * FROM table_users").use { resultSet ->
                 generateSequence { resultSet.takeIf { it.next() }?.toUsers() }.toList()
             }
         }
+    }
+
+    fun getOrders(): List<Orders> {
+    val orders = mutableListOf<Orders>()
+
+    try {
+        val statement: Statement = getConnection().createStatement()
+        val resultSet: ResultSet = statement.executeQuery("SELECT * FROM table_orders")
+
+        while (resultSet.next()){
+            orders.add((Orders(
+                id = resultSet.getInt("id"),
+                userId = resultSet.getInt("userId"),
+                orderStatus = resultSet.getString("orderStatus"),
+                products = resultSet.getString("products"),
+                totalAmount = resultSet.getDouble("totalAmount"),
+                createdAt = resultSet.getLong("createdAt"),
+                updatedAt = resultSet.getLong("updatedAt")
+            )
+                    )
+            )
+        }
+
+        resultSet.close()
+        statement.close()
+    } catch (e: Exception){
+        println("Error fetching orders ${e.message}")
+    }
+    return orders
+    }
+
+    fun getNewOrder() = client.use { connection ->
+    connection.createStatement().use { statement ->
+        statement.executeQuery("SELECT * FROM table_orders").use { resultSet ->
+            generateSequence { resultSet.takeIf { it.next() }?.toOrders() }.toList()
+        }
+    }
     }
 }
 
@@ -103,4 +141,24 @@ data class Users(
     var id: Int,
     var username: String,
     var email: String
+)
+
+fun ResultSet.toOrders(): Orders = Orders(
+    id = getInt("id"),
+    userId = getInt("userId"),
+    orderStatus = getString("orderStatus"),
+    products = getString("products"),
+    totalAmount = getDouble("totalAmount"),
+    createdAt = getLong("createdAt"),
+    updatedAt = getLong("updatedAt")
+)
+
+data class Orders(
+    var id: Int,
+    var userId: Int,
+    var orderStatus: String,
+    var products: String,
+    var totalAmount: Double,
+    var createdAt: Long,
+    var updatedAt: Long
 )
