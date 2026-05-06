@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class OrdersPageTest: TestBaseUI() {
+class OrdersPageTest : TestBaseUI() {
 
     @Test
     @DisplayName("Header navigation check: Orders page check")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("orders"))
     fun ordersPageCheck() {
         MainPage().navigateHeader().clickLink("Orders")
 

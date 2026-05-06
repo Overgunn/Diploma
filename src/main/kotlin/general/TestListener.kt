@@ -9,7 +9,7 @@ import org.junit.platform.launcher.TestExecutionListener
 import org.junit.platform.launcher.TestIdentifier
 import org.junit.platform.launcher.TestPlan
 
-class TestListener: Controllers(), TestExecutionListener {
+class TestListener : Controllers(), TestExecutionListener {
 
     private val authHelper = AuthorizationHelper()
 
@@ -26,7 +26,8 @@ class TestListener: Controllers(), TestExecutionListener {
     override fun executionFinished(
         testIdentifier: TestIdentifier,
         testExecutionResult: TestExecutionResult
-    ) {}
+    ) {
+    }
 
     override fun executionSkipped(testIdentifier: TestIdentifier, reason: String) {
         if (!testIdentifier.isTest) return
@@ -45,7 +46,7 @@ class TestListener: Controllers(), TestExecutionListener {
 
         GarbageCollector.user.forEach { id ->
             users.deleteUserById(token = authHelper.getAdminToken(), id = id)
-                .also {println("Deleted user: $id")}
+                .also { println("Deleted user: $id") }
         }
 
         GarbageCollector.products.forEach { id ->

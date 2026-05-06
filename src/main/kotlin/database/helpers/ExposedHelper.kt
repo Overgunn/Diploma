@@ -43,8 +43,7 @@ class ExposedHelper {
     }
 }
 
-
-object ProductEntity: IntIdTable("table_products") {
+object ProductEntity : IntIdTable("table_products") {
     var Name = varchar("name", 100)
     var Description = varchar("description", 255)
     var Price = double("price")
@@ -58,14 +57,14 @@ fun ProductEntity.toModel(resultRow: ResultRow) = Product(
 )
 
 
-object UsersEntity: IntIdTable("table_users") {
+object UsersEntity : IntIdTable("table_users") {
     var username = varchar("username", 255)
     var password = varchar("password", 255)
-    var email = varchar("email", 255)
+    var email = varchar("email", 255).uniqueIndex()
 }
 
 fun UsersEntity.toModel(resultRow: ResultRow) = Users(
     id = resultRow[id].value,
     username = resultRow[UsersEntity.username],
-    email = resultRow[UsersEntity.email],
+    email = resultRow[UsersEntity.email]
 )

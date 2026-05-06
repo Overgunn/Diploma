@@ -26,6 +26,6 @@ class CartPopup {
 
     @Step("Get cart total price")
     fun getTotalPrice(): Float {
-        return cartPopupTotalSum.text.filter {it.isDigit()}.toFloat() / 100f
+        return cartPopupTotalSum.text.filter { it.isDigit() }.toFloat() / 100f
     }
 }

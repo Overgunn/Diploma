@@ -4,9 +4,9 @@ import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.controllers.Controllers
 import database.helpers.ExposedHelper
 import database.helpers.JDBCHelper
-import frontend.helpers.UserHelper
 import frontend.components.popup.CreateAccountPopup
 import frontend.helpers.TestBaseUI
+import frontend.helpers.UserHelper
 import frontend.pages.MainPage
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -16,14 +16,14 @@ import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 import java.lang.Thread.sleep
 
-class DbCreateUser: TestBaseUI() {
+class DbCreateUser : TestBaseUI() {
 
     private val jdbcClient = JDBCHelper()
     private val userHelper = UserHelper()
     private val controllers = Controllers()
 
     @Test
-    @Tags(Tag("DB"),Tag("regress"),Tag("users"))
+    @Tags(Tag("DB"), Tag("regress"), Tag("users"))
     @DisplayName("Create and check user with basic JDBC kotlin helper")
     fun testCreateUserWithJdbcHelper() {
         val username = "testDBuser"
@@ -40,7 +40,7 @@ class DbCreateUser: TestBaseUI() {
 
         sleep(2000) // race-condition
 
-        val users = jdbcClient.getUsers().first { it.email == email}
+        val users = jdbcClient.getUsers().first { it.email == email }
 
         users shouldNotBe null
         users.username shouldBe username
@@ -54,7 +54,7 @@ class DbCreateUser: TestBaseUI() {
     }
 
     @Test
-    @Tags(Tag("DB"),Tag("regress"),Tag("users"))
+    @Tags(Tag("DB"), Tag("regress"), Tag("users"))
     @DisplayName("Create and check user with Exposed DB helper")
     fun testCreateUserWithExposedHelper() {
         val exposedHelper = ExposedHelper()
@@ -70,7 +70,7 @@ class DbCreateUser: TestBaseUI() {
             .joinAs(username, email, password)
         userHelper.usersForGC(email)
 
-        val users = exposedHelper.getAllUsersExposed().first { it.email == email}
+        val users = exposedHelper.getAllUsersExposed().first { it.email == email }
 
         users shouldNotBe null
         users.username shouldBe username

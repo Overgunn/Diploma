@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class ArrayNotEmptyTest {
 
     @Test
-    @Tags(Tag("misc"),Tag("arrays"))
+    @Tags(Tag("misc"), Tag("arrays"))
     @DisplayName("Arrays is not empty")
     fun arrayNotEmptyCheck() {
         val intArray = arrayOf(1, 2, 3)

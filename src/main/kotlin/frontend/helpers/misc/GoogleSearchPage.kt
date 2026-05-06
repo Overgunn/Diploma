@@ -1,4 +1,4 @@
-package en.QAguru.frontend.helpers.misc
+package frontend.helpers.misc
 
 import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selectors.byName

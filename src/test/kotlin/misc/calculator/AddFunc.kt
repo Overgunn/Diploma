@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 class AddFunc {
 
     @Test
-    @Tags(Tag("misc"),Tag("calculator"))
+    @Tags(Tag("misc"), Tag("calculator"))
     @DisplayName("Addition function")
     fun additionOfTwoNumbers() {
         val a = 1

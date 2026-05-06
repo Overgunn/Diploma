@@ -2,8 +2,8 @@ package frontend.components.list
 
 import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
-import frontend.helpers.Wrappers.Companion.byDataTestGroup
 import frontend.helpers.Extensions.Companion.toMoney
+import frontend.helpers.Wrappers.Companion.byDataTestGroup
 
 class CartItems {
 
@@ -21,8 +21,10 @@ class CartItems {
                     btnDecrement = it.find(byDataTestGroup("cart-item-decrement")),
                     btnRemoveItem = it.find(byDataTestGroup("cart-item-remove")),
                     quantity = it.find(byDataTestGroup("cart-item-qty")).text.toInt()
-                ) }
+                )
+            }
     }
+
     data class CartItem(
         val image: SelenideElement,
         val name: String,

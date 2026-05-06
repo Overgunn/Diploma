@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class ArrayGetFirstElement {
 
     @Test
-    @Tags(Tag("misc"),Tag("arrays"))
+    @Tags(Tag("misc"), Tag("arrays"))
     @DisplayName("Checks first element in given arrays")
     fun arrayGetFirstElement() {
         val numbers = arrayOf(1, 2, 3)

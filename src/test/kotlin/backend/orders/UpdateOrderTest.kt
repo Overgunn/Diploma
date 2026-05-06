@@ -4,9 +4,9 @@ import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.api.extensions.Extensions.Companion.getErrorAsObject
 import backend.api.models.ErrorResponse
 import backend.api.models.orders.CreateOrderRequest
-import backend.api.models.orders.OrderErrorResponse.wrongOrderStatus
 import backend.api.models.orders.ProductOrderRequest
 import backend.api.models.orders.UpdateOrderRequest
+import backend.api.models.orders.wrongOrderStatus
 import backend.controllers.Controllers
 import backend.helpers.AuthorizationHelper
 import io.kotest.matchers.shouldBe
@@ -17,17 +17,17 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class UpdateOrderTest: Controllers() {
+class UpdateOrderTest : Controllers() {
 
     val authHelper = AuthorizationHelper()
 
     @Test
     @DisplayName("Update order status test")
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    @Tags(Tag("regress"), Tag("backend"), Tag("orders"))
     fun updateOrderStatusCheck() {
         val userToken = authHelper.getNewToken()
 
-       val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
+        val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
 
         val updatedOrder = orders.updateOrderById(
             token = userToken,
@@ -41,7 +41,7 @@ class UpdateOrderTest: Controllers() {
 
 
     @DisplayName("Update order status test using all available statuses")
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    @Tags(Tag("regress"), Tag("backend"), Tag("orders"))
     @ParameterizedTest(name = "Update order status to: {0}")
     @ValueSource(strings = ["PENDING", "IN_PROGRESS", "COMPLETED"])
     fun updateOrderStatusParametrizedCheck(status: String) {
@@ -63,7 +63,7 @@ class UpdateOrderTest: Controllers() {
 
     @Test
     @DisplayName("Update order with invalid status")
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    @Tags(Tag("regress"), Tag("backend"), Tag("orders"))
     fun updateNonexistentOrderStatusCheck() {
         val userToken = authHelper.getNewToken()
 

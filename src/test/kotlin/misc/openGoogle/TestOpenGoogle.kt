@@ -2,8 +2,8 @@ package misc.openGoogle
 
 import com.codeborne.selenide.Configuration
 import com.codeborne.selenide.Selenide
-import en.QAguru.frontend.helpers.misc.GoogleSearchPage
 import frontend.helpers.TestBaseUI
+import frontend.helpers.misc.GoogleSearchPage
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName

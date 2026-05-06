@@ -1,5 +1,6 @@
 package backend.controllers
 
+import backend.api.endpoints.Endpoints
 import backend.api.extensions.Extensions.Companion.getAsObject
 import backend.api.models.orders.CreateOrderRequest
 import backend.api.models.orders.CreateOrderResponse
@@ -8,16 +9,19 @@ import backend.helpers.AuthorizationHelper
 import backend.helpers.GarbageCollector
 import io.qameta.allure.Step
 import okhttp3.ResponseBody
-import org.example.kotlin.backend.api.endpoints.Endpoints
 import retrofit2.Response
 
-class OrderController: Endpoints() {
+class OrderController : Endpoints() {
 
     val authHelper = AuthorizationHelper()
 
     @Step("Get all orders")
-    fun getAllOrders(token: String = authHelper.getAdminToken(), offset: Int = 0, limit: Int = 50): Response<List<CreateOrderResponse>> {
-        return orders.getAllOrders(token,offset,limit).execute()
+    fun getAllOrders(
+        token: String = authHelper.getAdminToken(),
+        offset: Int = 0,
+        limit: Int = 50
+    ): Response<List<CreateOrderResponse>> {
+        return orders.getAllOrders(token, offset, limit).execute()
     }
 
     @Step("Get order with id: {id}")

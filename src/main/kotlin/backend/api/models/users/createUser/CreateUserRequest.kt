@@ -2,7 +2,7 @@ package backend.api.models.users.createUser
 
 import kotlin.random.Random
 
-data class CreateUserRequest (
+data class CreateUserRequest(
     var username: String,
     var password: String,
     var email: String

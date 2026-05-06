@@ -1,7 +1,7 @@
-package org.example.kotlin.backend.api.endpoints
+package backend.api.endpoints
 
 import backend.api.models.auth.LoginRequest
-import org.example.kotlin.backend.api.models.auth.LoginResponse
+import backend.api.models.auth.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -9,5 +9,5 @@ import retrofit2.http.POST
 interface AuthEndpoints {
 
     @POST("auth/login")
-    fun postLogin(@Body body: LoginRequest) : Call<LoginResponse>
+    fun postLogin(@Body body: LoginRequest): Call<LoginResponse>
 }

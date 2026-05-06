@@ -12,6 +12,7 @@ class JoinPopup {
     fun getTitle(): String {
         return joinDialogPopupTitle.text
     }
+
     @Step("Click 'Log in to your account' link")
     fun signInPopupClick(): JoinPopup {
         joinDialogPopupCreate.click()

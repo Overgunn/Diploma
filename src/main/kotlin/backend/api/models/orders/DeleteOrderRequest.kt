@@ -1,5 +1,5 @@
 package backend.api.models.orders
 
-data class DeleteOrderRequest (
+data class DeleteOrderRequest(
     val orderId: Int
 )

@@ -1,8 +1,6 @@
 package general
 
-import java.util.Properties
-import kotlin.apply
-import kotlin.jvm.java
+import java.util.*
 
 object Config {
     private val DEFAULT_PROP_FILE = "/dev.properties"
@@ -26,6 +24,7 @@ object Config {
             moonHost = properties.getProperty("moon.host")
         )
     }
+
     data class Props(
         val browserName: String,
         val browserVersion: String,

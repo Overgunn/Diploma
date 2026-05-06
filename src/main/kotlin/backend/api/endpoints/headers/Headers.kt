@@ -1,4 +1,4 @@
-package backend.api.endpoints.Headers
+package backend.api.endpoints.headers
 
 object Headers {
 

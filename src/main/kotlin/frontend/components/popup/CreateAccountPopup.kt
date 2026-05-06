@@ -21,6 +21,7 @@ class CreateAccountPopup {
         submitButton.click()
         return this
     }
+
     @Step("Errors for invalid credentials")
     fun getJoinErrorMessage(): String {
         return errorMessage.text

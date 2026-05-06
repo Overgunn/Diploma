@@ -12,15 +12,13 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class DeleteOrderTest: Controllers() {
-
-    val authHelper = AuthorizationHelper()
+class DeleteOrderTest : Controllers() {
 
     @Test
     @DisplayName("Create and delete order")
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    @Tags(Tag("regress"), Tag("backend"), Tag("orders"))
     fun deleteOrderCheck() {
-        val userToken = authHelper.getNewToken()
+        val userToken = AuthorizationHelper().getNewToken()
 
         val order = orders.createNewOrder(CreateOrderRequest(null, listOf(ProductOrderRequest(1)))).getAsObject()
         val delete = orders.deleteOrder(token = userToken, order.id)
@@ -32,9 +30,9 @@ class DeleteOrderTest: Controllers() {
 
     @Test
     @DisplayName("Delete non-existent order")
-    @Tags(Tag("regress"),Tag("backend"),Tag("orders"))
+    @Tags(Tag("regress"), Tag("backend"), Tag("orders"))
     fun deleteNonexistentOrder() {
-        val userToken = authHelper.getNewToken()
+        val userToken = AuthorizationHelper().getNewToken()
         val delete = orders.deleteOrder(token = userToken, 0)
 
         delete.code() shouldBe 404

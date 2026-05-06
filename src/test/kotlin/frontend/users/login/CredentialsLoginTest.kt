@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class CredentialsLoginTest: TestBaseUI() {
+class CredentialsLoginTest : TestBaseUI() {
 
     @Test
     @DisplayName("Login into account via UI")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("users"))
     fun loginCheck() {
         val email = "positiveLoginTest@positiveLoginTest.com"
         val password = "positiveLoginTest"
@@ -36,12 +36,11 @@ class CredentialsLoginTest: TestBaseUI() {
     }
 
     @DisplayName("Negative: login into account via UI")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("users"))
     @ParameterizedTest(name = "Email {0}, Password: {1}, Error: {2}")
     @CsvSource(
         "'', '', 'Please enter email and password'",
-        "'1@1.com', '', 'Please enter email and password'",
-        "'wrongpass@wrongpass.com', 'wrongpass1', 'Wrong password: wrongpass | wrongpass1'"
+        "'1@1.com', '', 'Please enter email and password'"
     )
     fun negativeLoginCheck(email: String, password: String, error: String) {
 

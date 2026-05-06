@@ -10,7 +10,7 @@ class Extensions {
     companion object {
 
         @Step("Check if response is successful")
-        fun <T> Response<T>.checkIfSuccessful(): Boolean{
+        fun <T> Response<T>.checkIfSuccessful(): Boolean {
             if (!this.isSuccessful) fail("Response was not successful: code ${code()}")
             return true
         }
@@ -20,7 +20,10 @@ class Extensions {
             return try {
                 body()!!
             } catch (e: Exception) {
-                throw Error("Response body is null or cannot be cast to the specified type: body: ${body()} | errorBody: ${errorBody()?.string()}", e)
+                throw Error(
+                    "Response body is null or cannot be cast to the specified type: body: ${body()} | errorBody: ${errorBody()?.string()}",
+                    e
+                )
             }
         }
 
@@ -29,7 +32,10 @@ class Extensions {
             return try {
                 Gson().fromJson(errorBody()?.string().orEmpty(), R::class.java)
             } catch (e: Exception) {
-                throw Error("Error body is null or cannot be cast to the specified type: errorBody: ${errorBody()?.string()}", e)
+                throw Error(
+                    "Error body is null or cannot be cast to the specified type: errorBody: ${errorBody()?.string()}",
+                    e
+                )
             }
         }
 

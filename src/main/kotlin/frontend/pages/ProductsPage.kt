@@ -5,8 +5,8 @@ import com.codeborne.selenide.Selenide
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.elements
 import com.codeborne.selenide.SelenideElement
-import frontend.components.list.ProductItem
 import frontend.components.list.ProductCard
+import frontend.components.list.ProductItem
 import frontend.helpers.Wrappers.Companion.byDataTestGroup
 import frontend.helpers.Wrappers.Companion.byDataTestId
 import io.qameta.allure.Step

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class MultiplyFunc {
 
     @Test
-    @Tags(Tag("misc"),Tag("calculator"))
+    @Tags(Tag("misc"), Tag("calculator"))
     @DisplayName("Multiply function")
     fun multiplicationOfTwoNumbers() {
         val a = 2

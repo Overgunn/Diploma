@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class OrdersUpdateTest: TestBaseUI() {
+class OrdersUpdateTest : TestBaseUI() {
 
     val orderHelper = OrderHelperBE()
     val controllers = Controllers()
@@ -22,7 +22,7 @@ class OrdersUpdateTest: TestBaseUI() {
 
     @Test
     @DisplayName("Create, and check order status via UI")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("orders"))
     fun orderStatusCheck() {
         val testOrder = orderHelper.createOrderWithProduct()
 
@@ -39,7 +39,7 @@ class OrdersUpdateTest: TestBaseUI() {
 
     @Test
     @DisplayName("Create and update order status, check updated status via UI")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("orders"))
     fun orderStatusUpdateCheck() {
 
         val userToken = authHelper.getNewToken()

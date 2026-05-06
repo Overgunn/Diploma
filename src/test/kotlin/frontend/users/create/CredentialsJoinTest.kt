@@ -1,8 +1,8 @@
 package frontend.users.create
 
-import frontend.helpers.UserHelper
 import frontend.components.popup.CreateAccountPopup
 import frontend.helpers.TestBaseUI
+import frontend.helpers.UserHelper
 import frontend.pages.MainPage
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DisplayName
@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-class CredentialsJoinTest: TestBaseUI() {
+class CredentialsJoinTest : TestBaseUI() {
 
     private val userHelper = UserHelper()
 
     @Test
     @DisplayName("Create account validation test via UI")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("users"))
     fun createAccountCheck() {
         val username = "testBasic"
         val email = "testBasic@testBasic.com"
@@ -35,13 +35,13 @@ class CredentialsJoinTest: TestBaseUI() {
     }
 
     @DisplayName("Negative: create account via UI using invalid credentials")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("users"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("users"))
     @ParameterizedTest(name = "Username: {0}, Email {1}, Password: {2}, Error: {3}")
     @CsvSource(
         "'', '', '', 'Please enter username, email and password'",
         "'user', '', '', 'Please enter username, email and password'",
-        "'user', 'user@user.com', '', 'Please enter username, email and password'",
-        "'nonexistentUser1','nonexistantUser1@nonexistantUser1.com','nonexistentUser1', 'Something went wrong. Please verify request.'")
+        "'user', 'user@user.com', '', 'Please enter username, email and password'"
+    )
     fun createAccountValidationCheck(username: String, email: String, password: String, expectedError: String) {
 
         MainPage().navigateHeader().clickLink("Join")

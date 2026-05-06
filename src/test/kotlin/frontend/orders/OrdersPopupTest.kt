@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 
-class OrdersPopupTest: TestBaseUI() {
+class OrdersPopupTest : TestBaseUI() {
 
     private val orderHelper = OrderHelperFE()
 
     @Test
     @DisplayName("Create an order and check order popup window")
-    @Tags(Tag("frontend"),Tag("regress"),Tag("orders"))
+    @Tags(Tag("frontend"), Tag("regress"), Tag("orders"))
     fun ordersPopupInfoCheck() {
         val firstPopularItem = MainPage().open().getPopularProducts().first()
         firstPopularItem.btnIncrement.click()

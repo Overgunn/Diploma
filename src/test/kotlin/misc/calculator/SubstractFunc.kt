@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class SubtractFunc {
 
     @Test
-    @Tags(Tag("misc"),Tag("calculator"))
+    @Tags(Tag("misc"), Tag("calculator"))
     @DisplayName("Substraction function")
     fun subtractionOfTwoNumbers() {
         val a = 2

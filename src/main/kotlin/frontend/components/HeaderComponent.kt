@@ -19,7 +19,7 @@ class HeaderComponent {
 
     @Step("Clicks header {name} link")
     fun clickLink(name: String): HeaderComponent {
-        linksHeader.first { it.text.contains(name)}.click()
+        linksHeader.first { it.text.contains(name) }.click()
         return this
     }
 

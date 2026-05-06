@@ -3,13 +3,12 @@ package database.helpers
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.Statement
-import kotlin.use
 
 class JDBCHelper {
 
     private val jdbcUrl = "jdbc:postgresql://localhost:5432/playground"
     private val username: String = "postgres"
-    private val password: String= "postgres"
+    private val password: String = "postgres"
     private val client = DriverManager.getConnection(jdbcUrl, username, password)
     private fun getConnection() = DriverManager.getConnection(jdbcUrl, username, password)
 
@@ -20,7 +19,7 @@ class JDBCHelper {
             val statement: Statement = client.createStatement()
             val resultSet: ResultSet = statement.executeQuery("SELECT * FROM table_products")
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 val product = Product(
                     id = resultSet.getInt("id"),
                     name = resultSet.getString("name"),
@@ -31,7 +30,7 @@ class JDBCHelper {
 
             resultSet.close()
             statement.close()
-        } catch (e: Exception){
+        } catch (e: Exception) {
             println("Error fetching products ${e.message}")
         }
 
@@ -53,19 +52,20 @@ class JDBCHelper {
             val statement: Statement = client.createStatement()
             val resultSet: ResultSet = statement.executeQuery("SELECT * FROM table_users")
 
-            while (resultSet.next()){
-                users.add((Users(
-                    id = resultSet.getInt("id"),
-                    username = resultSet.getString("username"),
-                    email = resultSet.getString("email")
-                )
-                        )
+            while (resultSet.next()) {
+                users.add(
+                    (Users(
+                        id = resultSet.getInt("id"),
+                        username = resultSet.getString("username"),
+                        email = resultSet.getString("email")
+                    )
+                            )
                 )
             }
 
             resultSet.close()
             statement.close()
-        } catch (e: Exception){
+        } catch (e: Exception) {
             println("Error fetching users ${e.message}")
         }
         return users
@@ -80,40 +80,41 @@ class JDBCHelper {
     }
 
     fun getOrders(): List<Orders> {
-    val orders = mutableListOf<Orders>()
+        val orders = mutableListOf<Orders>()
 
-    try {
-        val statement: Statement = getConnection().createStatement()
-        val resultSet: ResultSet = statement.executeQuery("SELECT * FROM table_orders")
+        try {
+            val statement: Statement = getConnection().createStatement()
+            val resultSet: ResultSet = statement.executeQuery("SELECT * FROM table_orders")
 
-        while (resultSet.next()){
-            orders.add((Orders(
-                id = resultSet.getInt("id"),
-                userId = resultSet.getInt("userId"),
-                orderStatus = resultSet.getString("orderStatus"),
-                products = resultSet.getString("products"),
-                totalAmount = resultSet.getDouble("totalAmount"),
-                createdAt = resultSet.getLong("createdAt"),
-                updatedAt = resultSet.getLong("updatedAt")
-            )
+            while (resultSet.next()) {
+                orders.add(
+                    (Orders(
+                        id = resultSet.getInt("id"),
+                        userId = resultSet.getInt("userId"),
+                        orderStatus = resultSet.getString("orderStatus"),
+                        products = resultSet.getString("products"),
+                        totalAmount = resultSet.getDouble("totalAmount"),
+                        createdAt = resultSet.getLong("createdAt"),
+                        updatedAt = resultSet.getLong("updatedAt")
                     )
-            )
-        }
+                            )
+                )
+            }
 
-        resultSet.close()
-        statement.close()
-    } catch (e: Exception){
-        println("Error fetching orders ${e.message}")
-    }
-    return orders
+            resultSet.close()
+            statement.close()
+        } catch (e: Exception) {
+            println("Error fetching orders ${e.message}")
+        }
+        return orders
     }
 
     fun getNewOrder() = client.use { connection ->
-    connection.createStatement().use { statement ->
-        statement.executeQuery("SELECT * FROM table_orders").use { resultSet ->
-            generateSequence { resultSet.takeIf { it.next() }?.toOrders() }.toList()
+        connection.createStatement().use { statement ->
+            statement.executeQuery("SELECT * FROM table_orders").use { resultSet ->
+                generateSequence { resultSet.takeIf { it.next() }?.toOrders() }.toList()
+            }
         }
-    }
     }
 }
 
@@ -134,7 +135,7 @@ data class Product(
 fun ResultSet.toUsers(): Users = Users(
     id = getInt("id"),
     username = getString("username"),
-    email = getString("email"),
+    email = getString("email")
 )
 
 data class Users(

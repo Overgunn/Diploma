@@ -5,7 +5,7 @@ import backend.controllers.Controllers
 import backend.helpers.GarbageCollector
 import io.qameta.allure.Step
 
-class UserHelper: Controllers() {
+class UserHelper : Controllers() {
 
 
     @Step("Create user via UI and add it to GC")

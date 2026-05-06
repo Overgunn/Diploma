@@ -6,13 +6,19 @@ import backend.api.models.products.CreateProductResponse
 import backend.controllers.Controllers
 import io.qameta.allure.Step
 
-class ProductHelper: Controllers() {
+class ProductHelper : Controllers() {
 
     @Step("Create a number of coffee products: {count}")
     fun createCoffeeProduct(count: Int): List<CreateProductRequest> {
         val listOfProducts = mutableListOf<CreateProductRequest>()
-        for (i in 1..count){
-            listOfProducts.add(CreateProductRequest("Coffee #$i", description = "Description for coffee product #$i", price = i.toDouble()))
+        for (i in 1..count) {
+            listOfProducts.add(
+                CreateProductRequest(
+                    "Coffee #$i",
+                    description = "Description for coffee product #$i",
+                    price = i.toDouble()
+                )
+            )
         }
 
         listOfProducts.forEach {
@@ -32,7 +38,7 @@ class ProductHelper: Controllers() {
         }
 
         val addedProducts = mutableListOf<CreateProductRequest>()
-        repeat(count){i ->
+        repeat(count) { i ->
             val product = CreateProductRequest(
                 name = "${name} #$i",
                 description = "Description for product #$i",
@@ -47,8 +53,14 @@ class ProductHelper: Controllers() {
     @Step("Create a number of tea products: {count}")
     fun createTeaProduct(count: Int): List<CreateProductRequest> {
         val listOfProducts = mutableListOf<CreateProductRequest>()
-        for (i in 1..count){
-            listOfProducts.add(CreateProductRequest("Tea #$i", description = "Description for tea product #$i", price = i.toDouble()))
+        for (i in 1..count) {
+            listOfProducts.add(
+                CreateProductRequest(
+                    "Tea #$i",
+                    description = "Description for tea product #$i",
+                    price = i.toDouble()
+                )
+            )
         }
 
         listOfProducts.forEach {

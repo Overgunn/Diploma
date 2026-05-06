@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class DivideFunc {
 
     @Test
-    @Tags(Tag("misc"),Tag("calculator"))
+    @Tags(Tag("misc"), Tag("calculator"))
     @DisplayName("Dividing function")
     fun divideTwoNumbers() {
         val a = 9

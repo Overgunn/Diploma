@@ -7,7 +7,7 @@ import backend.api.models.orders.ProductOrderRequest
 import backend.controllers.Controllers
 import io.qameta.allure.Step
 
-class OrderHelperBE: Controllers() {
+class OrderHelperBE : Controllers() {
 
     private val productHelper = ProductHelper()
 
